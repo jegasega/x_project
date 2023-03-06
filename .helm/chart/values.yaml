@@ -6,3 +6,6 @@ image:
   repository: jegasega/db_homework
   tag: latest
 
+kafka:
+  server: kafka-0.kafka-headless.default.svc.cluster.local
+  read_file: /home/appuser/db_homework/test.log
