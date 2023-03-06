@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for db_homework
+name: db-homework
+version: 1.0

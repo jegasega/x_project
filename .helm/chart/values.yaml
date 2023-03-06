@@ -1,0 +1,8 @@
+replicaCount: 1
+
+app_name: db-homework
+
+image:
+  repository: jegasega/db_homework
+  tag: latest
+
