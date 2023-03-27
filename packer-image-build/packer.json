@@ -54,6 +54,7 @@
       "role_paths": [
         "../ansible-infra/roles/os",
         "../ansible-infra/roles/ntp",
+        "../ansible-infra/roles/users_login",
         "../ansible-infra/roles/kubernetes"
       ]
     },
