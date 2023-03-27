@@ -1,0 +1,102 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+# tibco hack
+10.18.45.138 tsfjmst1.extra.sonera.fi
+
+{% if ulm_service.name == "platform" %}
+#hack for wrong MIT name in config
+131.177.51.21   ua001colossus.ddc.teliasonera.net
+10.18.45.154    mit-prod
+10.18.45.154    electron-prod
+10.18.45.154    smtp.tele.fi
+{% elif ulm_service.name == "admin" %}
+#hack for wrong MIT name in config
+131.177.51.21   ua001colossus.ddc.teliasonera.net
+10.18.45.187    mit-prod
+10.18.45.187    electron-prod
+10.18.45.187    smtp.tele.fi
+{% endif %}
+
+### APPLICATION NETWORK:
+
+10.18.45.148   platform1.app
+10.18.45.149   platform2.app
+10.18.45.150   platform3.app
+10.18.45.151   platform4.app
+10.18.45.152   platform5.app
+
+10.18.45.180   admin1.app
+10.18.45.181   admin2.app
+10.18.45.182   admin3.app
+
+10.18.45.212   db1.app
+10.18.45.213   db2.app
+10.18.45.214   db3.app
+10.18.45.215   db4.app
+
+10.18.45.116   proxy1.app
+10.18.45.117   proxy2.app
+10.18.45.118   proxy3.app
+
+10.18.45.244   uxdr1.app
+10.18.45.245   elk2.app
+10.18.45.246   elk3.app
+
+### MANAGEMENT NETWORK:
+
+10.18.46.121    gitlab.jkl gitlab.id.telia.fi gitlab.jkl.management.id.telia.fi
+
+10.18.44.228    proxy1-pre.jkl
+10.18.44.229    proxy2-pre.jkl
+10.18.44.230    proxy3-pre.jkl
+
+10.18.46.100	proxy1.jkl
+10.18.46.101	proxy2.jkl
+10.18.46.102	proxy3.jkl
+
+10.18.44.231    platform1-pre.jkl 
+10.18.44.232    platform2-pre.jkl
+10.18.44.233    platform3-pre.jkl
+10.18.44.234    platform4-pre.jkl
+10.18.44.235    platform5-pre.jkl
+
+10.18.46.103	platform1.jkl platform1.jkl.ulm.id.telia.fi
+10.18.46.104	platform2.jkl platform2.jkl.ulm.id.telia.fi
+10.18.46.105	platform3.jkl platform3.jkl.ulm.id.telia.fi
+10.18.46.106	platform4.jkl platform4.jkl.ulm.id.telia.fi
+10.18.46.107	platform5.jkl platform5.jkl.ulm.id.telia.fi
+
+10.18.44.236    admin1-pre.jkl
+10.18.44.237    admin2-pre.jkl
+10.18.44.238    admin3-pre.jkl
+
+10.18.46.108	admin1.jkl admin1.jkl.ulm.id.telia.fi
+10.18.46.109	admin2.jkl admin2.jkl.ulm.id.telia.fi
+10.18.46.110	admin3.jkl admin3.jkl.ulm.id.telia.fi
+
+10.18.44.239    db1-pre.jkl
+10.18.44.240    db2-pre.jkl
+10.18.44.241    db3-pre.jkl
+10.18.44.242    db4-pre.jkl
+
+10.18.46.111	db1.jkl
+10.18.46.112	db2.jkl
+10.18.46.113	db3.jkl
+10.18.46.114	db4.jkl
+
+10.18.44.244    elk1-pre.jkl
+10.18.44.245    elk2-pre.jkl
+10.18.44.246    elk3-pre.jkl
+
+10.18.46.116	uxdr1.jkl
+10.18.46.117	elk2.jkl
+10.18.46.118	elk3.jkl
+
+10.18.44.247    nfs1-pre.jkl
+
+10.18.44.248    zabbix1-pre.jkl
+10.18.44.248    zabbix1-pre.jkl.management.id.telia.fi
+
+10.18.44.249    jfrog1-pre.jkl
+10.18.44.249    jfrog1-pre.jkl.ulm.id.telia.fi

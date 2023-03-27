@@ -1,0 +1,12 @@
+---
+
+# Starting Mysql services
+#
+ - name: Start mysql service
+   service:
+     name: mysql
+     state: started
+   when: (primary_node == 1 and ansible_local.galera.bootstrap_mode != "active" and groups['all_db_servers']|map('extract', hostvars, ['ansible_local','galera','service_status'])|select('equalto', 'running')|list|length >= 1) or (primary_node == 0 and groups['all_db_servers']|map('extract', hostvars, ['ansible_local','galera','service_status'])|select('equalto', 'running')|list|length >= 1) or cluster_configuration == 'standalone'
+ - name: Check variables
+   debug:
+     msg: "System {{ groups['all_db_servers']|map('extract', hostvars, ['ansible_local','galera','service_status'])|select('equalto', 'running')|list|length }}"

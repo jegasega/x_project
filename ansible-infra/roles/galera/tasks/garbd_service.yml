@@ -1,0 +1,16 @@
+---
+
+# Starting GARBD service
+#
+ - name: Start garb service
+   service:
+     name: garb
+     state: started
+     enabled: yes
+   when: garbd_node == 1
+
+ - name: Stopping MySQL service
+   service:
+     name: "{{ mysql_service_name }}"
+     state: stopped
+     enabled: no

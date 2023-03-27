@@ -1,0 +1,43 @@
+---
+
+- name: Creating SystemD service file
+  copy:
+    src: systemd/galerachk@.service 
+    dest: /usr/lib/systemd/system/galerachk@.service
+    owner: root
+    group: root
+    mode: '0644'
+  when: ansible_distribution_major_version >= '7' 
+
+- name: Creating SystemD socket file
+  template:
+    src: galerachk.socket.j2
+    dest: /usr/lib/systemd/system/galerachk.socket
+    owner: root
+    group: root
+    mode: '0644'
+  when: ansible_distribution_major_version >= '7'
+
+- name: Enabling and starting Cluster Check service
+  systemd:
+    name='galerachk.socket'
+    enabled=yes
+    state=started
+    daemon_reload=yes
+  when: ansible_distribution_major_version >= '7'
+
+- name: Install XinetD daemon
+  import_tasks: install_xinetd.yml
+  when: ansible_distribution_major_version >= '7'
+
+- name: Creating XinetD service file
+  template:
+    src: etc/xinetd.d/galerachk.j2
+    dest: /etc/xinetd.d/galerachk
+    owner: root
+    group: root
+    mode: '0600'
+  when: ansible_distribution_major_version < '7'
+  notify: Restart Xinetd daemon
+
+ 

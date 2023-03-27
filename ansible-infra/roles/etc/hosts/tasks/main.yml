@@ -1,0 +1,8 @@
+---
+- name: push hosts template
+  template:
+      src: "{{ hosts_file }}"
+      dest: /etc/hosts
+      backup: yes
+      unsafe_writes: yes
+  tags: ["etchosts"]

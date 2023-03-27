@@ -1,0 +1,46 @@
+# {{ ansible_managed }}
+
+[mysqld]
+# Disable the query cache (required by Galera)
+query_cache_type=0
+query_cache_size=0
+
+# Enable row-based binary logging (required by Galera)
+binlog_format=ROW
+
+# Enable the Galera WSREP provider
+wsrep_provider=/usr/lib64/galera/libgalera_smm.so
+
+# Sets the name of the cluster for this node to join (must be shared by other nodes in the cluster)
+wsrep_cluster_name="{{ galera_wsrep_cluster_name }}"
+
+# Sets the IP addresses or hostnames of other MariaDB nodes in the cluster (must be shared by other nodes in the cluster)
+wsrep_cluster_address="gcomm://{{ groups['all_db_servers'] | map('extract', hostvars, [galera_cluster_interface_fact_var,'ipv4','address']) | list | zip_longest([], fillvalue=':4567') | map('join') | join(',') }}"
+
+# Sets the method used for SST (state snapshot transfer)
+# Possible values: mysqldump, rsync, xtrabackup, xtrabackup-v2, mariabackup
+{% if mariadb_server_version is version('10.2.14', '>') %}
+wsrep_sst_method=mariabackup
+{% else %}
+wsrep_sst_method=xtrabackup-v2
+{% endif %}
+
+
+# SST authentication (in the format of username:password)
+wsrep_sst_auth={{ galera_sst_user }}:{{ galera_sst_password }}
+
+
+# SST address to recieve SST packets 
+wsrep_sst_receive_address={{ hostvars[inventory_hostname]['ansible_' + galera_cluster_interface]['ipv4']['address'] }}
+
+# Enables WSREP debugging (do not enable in production systems)
+wsrep_debug={{ galera_debug_status }}
+
+# The maximum number of threads Galera will use to apply writes to master nodes. Default: 8
+wsrep_slave_threads={{ galera_slave_threads }}
+
+# Sets various options for the WSREP provider (Galera). Default: 1G
+wsrep_provider_options="gcache.size={{ galera_cache_size }};gmcast.listen_addr=tcp://{{  hostvars[inventory_hostname]['ansible_' + galera_cluster_interface]['ipv4']['address'] }}:4567;gmcast.segment={{ galera_segment_id }};gmcast.time_wait={{ galera_gmcast_time_wait }};gcache.recover={{ galera_gcache_recover }};evs.inactive_check_period={{ galera_evs_inactive_check_period }};evs.suspect_timeout={{ galera_evs_suspect_timeout }};evs.inactive_timeout={{ galera_evs_inactive_timeout }};evs.send_window={{ galera_evs_send_window }};evs.user_send_window={{ galera_evs_user_send_window }};"
+
+# Enable galera replication (required 10.1)
+wsrep_on={{ galera_replication_status }}

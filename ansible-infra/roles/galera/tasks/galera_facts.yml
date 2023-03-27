@@ -1,0 +1,22 @@
+---
+
+#- name: "Clear all custom facts"
+#  file:
+#    path: "/etc/ansible/facts.d"
+#    state: "absent"
+#
+- name: "Create custom fact directory"
+  file:
+    path: "/etc/ansible/facts.d"
+    state: "directory"
+    mode: 0755
+
+- name: "Facts for Galera status"
+  copy:
+    src: files/galera.fact
+    dest: /etc/ansible/facts.d/galera.fact
+    mode: 0755
+
+- name: "Re-run setup to use custom facts"
+  setup: ~
+

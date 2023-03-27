@@ -1,0 +1,27 @@
+# {{ ansible_managed }}
+
+[mysqld]
+
+# Install/Activate server_audit plugin at server startup
+plugin-load=server_audit.so
+
+# Prevents the plugin from being uninstalled with the UNINSTALL PLUGIN command
+server_audit=FORCE_PLUS_PERMANENT
+
+# Specifies events to include in log file
+server_audit_events = CONNECT,QUERY,TABLE
+
+# Enables/disables the server audit logging. Expected values are ON/OFF
+server_audit_logging = ON
+
+# Sets the path and the filename to the log file
+server_audit_file_path = {{ mysql_log_dir }}/{{ ansible_hostname }}-server-audit.log
+
+# Specifies the desired output type. Can be FILE or SYSLOG
+server_audit_output_type = FILE
+
+# Limits the size of individual log file (BYTES unless a "M" or "G" suffix is used)
+server_audit_file_rotate_size = 256M
+
+# Specifies the number of rotations to save. If set to 0 then the log never rotates
+server_audit_file_rotations = 1

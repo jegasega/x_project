@@ -1,0 +1,37 @@
+# {{ ansible_managed }}
+
+[mysqld]
+
+# Main data folder
+datadir={{ mysql_data_dir }}
+
+# Skip hostname resolutions
+skip-name-resolve
+
+# Number of maximum simultaneous connections allowed. Default: 15000
+max_connections={{ mysql_connections_count }}
+
+# Default storage engine (if not specified in the DDL)
+default-storage-engine=InnoDB
+
+# Sets the maximum number of tables MariaDB will cache in memory
+table_open_cache=2000
+
+# Sets the number of seconds MariaDB will wait before timing out connections. Default: 300
+wait_timeout={{ mysql_wait_timeout }}
+
+# The maximum of cached connections MariaDB will contain
+thread_cache_size=1000
+
+# Enables (or disables) the slow query log
+slow_query_log=1
+
+#Move slow logs off mysql lib directory
+slow_query_log_file={{ mysql_log_dir }}/{{ ansible_hostname }}-slow.log
+
+# Sets the minimum threshold (in seconds) for query executions to be considered slow queries. Default: 0.1
+long_query_time={{ mysql_long_query_time }}
+
+log_error={{ mysql_log_dir }}/{{ ansible_hostname }}.err
+
+character-set-server=utf8

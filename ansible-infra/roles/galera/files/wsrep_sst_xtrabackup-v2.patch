@@ -1,0 +1,11 @@
+--- ./wsrep_sst_xtrabackup-v2_bad	2018-03-28 09:11:07.111000049 +0000
++++ ./wsrep_sst_xtrabackup-v2	2018-03-28 08:53:20.981936057 +0000
+@@ -644,7 +644,7 @@
+ 
+     for i in {1..300}
+     do
+-        LSOF_OUT=$(lsof -sTCP:LISTEN -i TCP:${PORT} -a -c nc -c socat -F c)
++        LSOF_OUT=$(lsof -sTCP:LISTEN -i TCP:${PORT} -a -c nc -c socat -F c 2> /dev/null || :)
+         [ -n "${LSOF_OUT}" ] && break
+         sleep 0.2
+     done

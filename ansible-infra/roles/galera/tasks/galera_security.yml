@@ -1,0 +1,7 @@
+---
+
+- name: Install libselinux-python package 
+  yum: name='libselinux-python' state=present
+
+- name: Disable SELinux
+  selinux: policy=targeted state={{ selinux_state }}

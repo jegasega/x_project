@@ -1,0 +1,45 @@
+---
+
+- name: Main configuration folder creation
+  file:
+    path: "{{ mysql_config_folder }}"
+    owner: root
+    group: root
+    state: directory
+    recurse: no
+    mode: "755"
+
+- name: Main application folder creation
+  file:
+    path: "{{ application_dir }}"
+    owner: root
+    group: root
+    state: directory
+    recurse: no
+    mode: "755"
+
+- name: Data directory creation
+  file:
+    path: "{{ mysql_data_dir }}"
+    owner: mysql
+    group: mysql
+    state: directory
+    mode: "755"
+  register: data_dir_created
+
+- debug:
+    var: data_dir_created
+    verbosity: 2
+
+- name: Synchronize folders on the new install
+  shell: "rsync -a --ignore-existing {{ mysql_initial_data_dir }}/ {{ mysql_data_dir }}"
+  when: data_dir_created|changed and ( primary_node == 1 or cluster_configuration == "standalone" )
+
+- name: Log directory creation
+  file:
+    path: "{{ mysql_log_dir }}"
+    owner: mysql
+    group: mysql
+    state: directory
+    recurse: no
+    mode: "755"

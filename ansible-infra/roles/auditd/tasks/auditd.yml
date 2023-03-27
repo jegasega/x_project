@@ -1,0 +1,29 @@
+---
+
+- block:
+## https://github.com/lxc/lxd/issues/2004, only on xenial?
+    - name: ensure auditd package is present
+      package: name={{ auditd_pkg }} state=present update_cache=yes
+      register: pkg_result
+      until: pkg_result is success
+
+    - name: retrieve suid/sgid files list
+      command: find / -perm /u=s,g=s -type f
+      register: sugid_files
+      ignore_errors: true
+      changed_when: false
+
+    - name: configure audit system
+      template:
+        src: "{{ item }}.rules.j2"
+        dest: "{{ auditd_confdir }}/{{ item }}.rules"
+        mode: '0644'
+        backup: yes
+      with_items: "{{ auditd_rules_templates }}"
+      notify:
+        - restart auditd
+        - restart auditd - rhel7
+  when: >
+    not (ansible_virtualization_type is defined and
+          (ansible_virtualization_type == "lxc" or ansible_virtualization_type == "docker")
+        ) and not osquery_process_auditing

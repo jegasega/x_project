@@ -1,0 +1,11 @@
+---
+
+- name: Galera check configuration tasks
+  import_tasks: config.yml
+  tags:
+  - galera_check_config
+
+- name: Galera check service creating and running tasks
+  import_tasks: service_config.yml
+  tags:
+  - galera_check_service

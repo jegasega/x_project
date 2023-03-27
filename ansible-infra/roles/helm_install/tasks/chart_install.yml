@@ -1,0 +1,158 @@
+---
+
+#- name: Install Kubernetes lib
+#  command: "pip install kubernetes"
+
+#- name: Create storage class
+#  kubernetes.core.k8s:
+#    state: present
+#    apply: true
+#    template: sc.yaml.j2
+#   - pv.yaml.j2
+
+
+- name: Add Kafka chart repo
+  kubernetes.core.helm_repository:
+    name: bitnami
+    repo_url: "https://charts.bitnami.com/bitnami"
+
+- name: Add Elastic chart repo
+  kubernetes.core.helm_repository:
+    name: elastic
+    repo_url: "https://helm.elastic.co"
+
+- name: Deploy latest version of Elasticsearch chart
+  kubernetes.core.helm:
+    name: elasticsearch
+    state: present
+    release_namespace: default
+    chart_ref: elastic/elasticsearch
+    values:
+      replicas: 1
+      minimumMasterNodes: 1
+      esJavaOpts: "-Xmx256m -Xms256m"
+      clusterHealthCheckParams: "wait_for_status=yellow&timeout=1s"
+      resources:
+        requests:
+          cpu: "200m"
+          memory: "512M"
+        limits:
+          cpu: "1000m"
+          memory: "1024M"
+      volumeClaimTemplate:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "local-storage"
+        resources:
+          requests:
+            storage: 1Gi
+      esConfig:
+        elasticsearch.yml: |
+          network.host: "0.0.0.0"
+          path.data: /usr/share/elasticsearch/data
+          logger.level: info
+      readinessProbe:
+        failureThreshold: 5
+        initialDelaySeconds: 180
+
+- name: Deploy latest version of Kafka chart
+  kubernetes.core.helm:
+    name: kafka
+    state: present
+    release_namespace: default
+    chart_ref: bitnami/kafka
+    values:
+      replicas: 1
+      persistence:
+        enabled: false
+      zookeeper:
+        persistence:
+          enabled: false
+      heapOpts: "-Xmx256m -Xms256m"
+      resources:
+        requests:
+          cpu: "200m"
+          memory: "512M"
+        limits:
+          cpu: "1000m"
+          memory: "768M"
+
+
+- name: Deploy latest version of Logstash chart
+  kubernetes.core.helm:
+    name: logstash
+    state: present
+    release_namespace: default
+    chart_ref: elastic/logstash
+    values:
+      persistence:
+        enabled: false
+      logstashConfig:
+        logstash.yml: |
+          http.host: 0.0.0.0
+          xpack.monitoring.enabled: false
+          log.level: warn
+      logstashPipeline:
+        test_log.conf: |
+          input {
+            kafka{
+              bootstrap_servers => "kafka-0.kafka-headless.default.svc.cluster.local:9092"
+              topics => ["log-file"]
+            }
+          }
+          filter {
+            grok {
+              break_on_match => true
+              tag_on_failure => []
+              match => { 
+                "message" => "(?<logflag>^<[0-9]{2,}>)date=(?<date>\d{4}-\d{2}-\d{2}) time=%{TIME:time} devname=\"(?<devname>[A-Z]{2}-\d{1})\" devid=\"(?<devid>\w{24})\" logid=\"(?<logid>\w{10})\" type=\"%{WORD:type}\" subtype=\"%{WORD:subtype}\" level=\"%{WORD:level}\" vd=\"(?<vd>[A-Z]{2,}-\d{1,})\" eventtime=%{NUMBER:eventtime} srcip=%{IPV4:srcip} srcport=%{NUMBER:srcport} srcintf=\"%{WORD:srcintf}\" srcintfrole=\"%{WORD:srcintfrole}\" dstip=%{IPV4:dstip} dstport=%{NUMBER:dstport} dstintf=\"%{WORD:dstintf}\" dstintfrole=\"%{WORD:dstintfrole}\" poluuid=\"%{WORD:poluuid}\" sessionid=(?<sessionid>\d{9,}) proto=(?<proto>\d{1}) action=\"%{WORD:action}\" policyid=%{NUMBER:policyid} policytype=\"%{WORD:policytype}\" service=\"%{WORD:service}\" dstcountry=\"%{WORD:dstcountry}\" srccountry=\"%{WORD:srcountry}\" trandisp=\"%{WORD:trandisp}\" duration=%{NUMBER:duration} sentbyte=%{NUMBER:sentbyte} rcvdbyte=%{NUMBER:rcvdyte} sentpkt=%{NUMBER:sentpkt} appcat=\"%{WORD:appcat}\""              }
+            }
+          }
+          output {
+            elasticsearch {
+              hosts => ["https://elasticsearch-master:9200"]
+              user => '${ELASTICSEARCH_USERNAME}'
+              cacert => '/usr/share/logstash/config/certs/ca.crt'
+              password => '${ELASTICSEARCH_PASSWORD}'
+              index => "logstash"
+            } 
+            stdout { codec => rubydebug }
+          }
+      extraEnvs:
+        - name: "ELASTICSEARCH_USERNAME"
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-master-credentials
+              key: username
+        - name: "ELASTICSEARCH_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-master-credentials
+              key: password
+      secretMounts: 
+        - name: elasticsearch-master-certs
+          secretName: elasticsearch-master-certs
+          path: /usr/share/logstash/config/certs
+      logstashJavaOpts: "-Xmx768m -Xms768m"
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "512M"
+        limits:
+          cpu: "700m"
+          memory: "1024M"
+
+
+- name: Deploy latest version of Kibana chart
+  kubernetes.core.helm:
+    name: kibana
+    state: present
+    release_namespace: default
+    chart_ref: elastic/kibana
+    values:
+      resources:
+        requests:
+          cpu: "200m"
+          memory: "256M"
+        limits:
+          cpu: "500m"
+          memory: "512M"

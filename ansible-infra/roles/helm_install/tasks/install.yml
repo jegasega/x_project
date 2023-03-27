@@ -1,0 +1,11 @@
+---
+# Installing Helm
+
+- name: Helm download and install
+  ansible.builtin.unarchive:
+    src: https://get.helm.sh/helm-v3.9.4-linux-amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Copying Helm binary to the proper location
+  command: cp -a /usr/local/bin/linux-amd64/helm  /usr/local/bin/  

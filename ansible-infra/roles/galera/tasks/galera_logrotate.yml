@@ -1,0 +1,12 @@
+---
+
+- name: Add main MySQL configuration file
+  template: src=my.cnf.j2 dest=/etc/my.cnf
+    owner=root group=root mode=0644
+  notify: Restart Mysql service on cluster node
+
+- name: Add Galera node configuration
+  template: src=node.cnf.j2 dest={{ mysql_config_folder }}/node.cnf
+    owner=root group=root mode=0644
+  notify: Restart Mysql service on cluster node
+

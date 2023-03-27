@@ -1,0 +1,14 @@
+# Config rotating nginxlog hourly and keeping 15 days log
+/var/log/nginx/*log {
+    rotate 360
+    maxage 15
+    missingok
+    notifempty
+    compress
+    dateext
+    dateformat -%Y-%m-%d-%s.log
+    sharedscripts
+    postrotate
+        /bin/kill -USR1 $(cat /var/run/nginx.pid 2>/dev/null) 2>/dev/null || :
+    endscript
+}

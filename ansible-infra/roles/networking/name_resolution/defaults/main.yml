@@ -1,0 +1,8 @@
+---
+search_domains:
+  - "ulm.id.telia.fi"
+  - "id.telia.fi"
+nameservers:
+  - "8.8.8.8"
+  - "8.8.4.4"
+local_domain_name: "test.id.telia.fi"

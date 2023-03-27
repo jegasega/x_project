@@ -1,0 +1,11 @@
+#!/bin/bash
+# Copyright (C) 2018 Telia Company
+# Created by JS
+
+# Checking for the galera provisioner status on server 
+
+if /sbin/service mysql status | grep -q 'running' && /usr/sbin/ss -nlpt | grep -qE '3306.*mysqld'; then
+  echo "{\"mysql_status\" : \"running\"}"
+else
+  echo "{\"mysql_status\" : \"stopped\"}"
+fi

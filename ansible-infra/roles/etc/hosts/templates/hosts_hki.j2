@@ -1,0 +1,71 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+# tibco hack
+10.18.41.138 tsfjmst1.extra.sonera.fi
+
+{% if ulm_service.name == "platform" %}
+#hack for wrong MIT name in config
+131.177.51.21   ua001colossus.ddc.teliasonera.net
+10.18.41.154    mit-prod
+10.18.41.154    electron-prod
+10.18.41.154    smtp.tele.fi
+{% elif ulm_service.name == "admin" %}
+#hack for wrong MIT name in config
+131.177.51.21   ua001colossus.ddc.teliasonera.net
+10.18.41.187    mit-prod
+10.18.41.187    electron-prod
+10.18.41.187    smtp.tele.fi
+{% endif %}
+
+### APPLICATION NETWORK:
+
+10.18.41.148   platform1.app
+10.18.41.149   platform2.app
+10.18.41.150   platform3.app
+10.18.41.151   platform4.app
+10.18.41.152   platform5.app
+
+10.18.41.180   admin1.app
+10.18.41.181   admin2.app
+10.18.41.182   admin3.app
+
+10.18.41.212   db1.app
+10.18.41.213   db2.app
+10.18.41.214   db3.app
+10.18.41.215   db4.app
+
+10.18.41.116   proxy1.app
+10.18.41.117   proxy2.app
+10.18.41.118   proxy3.app
+
+10.18.41.244   uxdr1.app
+10.18.41.245   elk2.app
+10.18.41.246   elk3.app
+
+### MANAGEMENT NETWORK:
+
+10.18.42.7	   platform1.hki platform1.hki.ulm.id.telia.fi
+10.18.42.8	   platform2.hki platform2.hki.ulm.id.telia.fi
+10.18.42.9	   platform3.hki platform3.hki.ulm.id.telia.fi
+10.18.42.10	   platform4.hki platform4.hki.ulm.id.telia.fi
+10.18.42.11	   platform5.hki platform5.hki.ulm.id.telia.fi
+
+10.18.42.4	   proxy1.hki
+10.18.42.5	   proxy2.hki
+10.18.42.6	   proxy3.hki
+
+10.18.42.12	   admin1.hki admin1.hki.ulm.id.telia.fi
+10.18.42.13	   admin2.hki admin2.hki.ulm.id.telia.fi
+10.18.42.14	   admin3.hki admin3.hki.ulm.id.telia.fi
+
+10.18.42.15	   db1.hki
+10.18.42.16	   db2.hki
+10.18.42.17	   db3.hki
+10.18.42.18	   db4.hki
+
+10.18.42.20	   uxdr1.hki
+10.18.42.21	   elk2.hki
+10.18.42.22	   elk3.hki
+
+10.18.40.248   zabbix1-pre.hki zabbix1-pre.hki.management.id.telia.fi

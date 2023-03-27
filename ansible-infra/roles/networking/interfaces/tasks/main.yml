@@ -1,0 +1,31 @@
+---
+- name: render persistent rules
+  template:
+    src: "{{ item.file }}.j2"
+    dest: /etc/udev/rules.d/{{ item.file }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - file: '70-persistent-net.rules'
+  when: ansible_distribution_major_version < '7'
+  notify:
+    - reboot
+
+- name: render network scripts
+  template:
+    src: ifcfg-{{ item.purpose }}.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-{{ item.interface }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - interface: "{{ network_link.management }}"
+      purpose: management
+    - interface: "{{ network_link.main }}"
+      purpose: main
+  when:
+    - ip4_address is defined or item.purpose == 'management'
+  notify:
+    - reboot
+

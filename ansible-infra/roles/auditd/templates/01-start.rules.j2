@@ -1,0 +1,22 @@
+{{ ansible_managed | comment }}
+## /etc/audit/rules.d/audit.rules
+
+###################
+# Remove any existing rules
+###################
+
+-D
+
+###################
+# Buffer Size
+###################
+# Might need to be increased, depending on the load of your system.
+-b {{ auditd_buffer_size | default(32768) }}
+
+###################
+# Failure Mode
+###################
+# 0=Silent
+# 1=printk, print failure message
+# 2=panic, halt system
+-f {{ auditd_failure_mode | default(1) }}

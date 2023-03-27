@@ -1,0 +1,17 @@
+---
+
+- name: Add MariaDB repo
+  yum_repository:
+    name: mariadb
+    description: Repository For MariaDB installation
+    baseurl: http://yum.mariadb.org/{{ mariadb_release }}/centos{{ centos_release }}-amd64
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    gpgcheck: yes
+
+- name: Add MariaDB Tools repo
+  yum_repository:
+    name: mariadb-tools
+    description: Repository For MariaDB Tools installation
+    baseurl: https://downloads.mariadb.com/Tools/rhel/$releasever/$basearch
+    gpgkey: https://downloads.mariadb.com/Tools/MariaDB-Enterprise-GPG-KEY
+    gpgcheck: yes

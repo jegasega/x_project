@@ -1,0 +1,24 @@
+---
+- name: reboot
+  shell: reboot
+  ignore_errors: yes
+  when: reboot == "yes"
+  tags: skip_ansible_lint
+
+- name: smoke management ip
+  wait_for:
+    host: "{{ item }}"
+    port: "{{ item.port }}"
+    timeout: 120
+    delay: 20
+    sleep: 1
+  become: no
+  with_items:
+    - address: "{{ ip4_address_management }}"
+      port: "22"
+  when: reboot == "yes"
+
+- name: restart networking
+  service:
+    name: network
+    state: restarted

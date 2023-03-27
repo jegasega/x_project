@@ -1,0 +1,10 @@
+---
+- name: render /etc/resolv.conf
+  template:
+    src: "{{ item }}.j2"
+    dest: /etc/{{ item }}
+    mode: 0644
+    owner: root
+    group: root
+  with_items:
+    - resolv.conf

@@ -1,0 +1,13 @@
+---
+# file: roles/install/ntp/tasks/config.yml
+
+- name: render /etc/ntp.conf
+  template:
+      src: "{{ item }}.j2"
+      dest: /etc/{{ item }}
+      mode: 0644
+      owner: root
+      group: root
+  with_items:
+      - "ntp.conf"
+  notify: Restart ntpd service

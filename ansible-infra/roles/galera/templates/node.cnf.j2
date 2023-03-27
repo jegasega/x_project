@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+[mysqld]
+
+# Sets the interface for the WSREP provider to listen and communicate on
+wsrep_node_address="{{ hostvars[inventory_hostname]['ansible_' + galera_cluster_interface]['ipv4']['address'] }}"
+
+# Sets the WSREP name of this node
+wsrep_node_name="{{ ansible_nodename }}"

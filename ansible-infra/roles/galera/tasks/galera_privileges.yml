@@ -1,0 +1,67 @@
+---
+
+- name: Trying to connect to the MySQL without root password
+  shell: mysql -u root -e"SHOW DATABASES;" | grep -q mysql 2>&1
+  register: dbstatus
+  failed_when: dbstatus.rc == 2
+  changed_when: false
+
+- name: Create galera root user
+  mysql_user:
+    login_host: "localhost"
+    name: "{{ mysql_root_user }}"
+    host: "localhost"
+    password: "{{ mysql_root_password }}"
+    state: present
+  notify: MySQL upgrade
+  when: dbstatus.rc == 0 and ( primary_node == 1 or cluster_configuration == "standalone" )
+  no_log: false
+
+- name: Create/Update main MySQL users
+  mysql_user:
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_password }}"
+    login_host: "localhost"
+    name: "{{ item.name }}"
+    host: "{{ item.host }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv }}"
+    state: "{{ item.state }}"
+  with_items:
+    - name: "{{ mysql_root_user }}"
+      host: "%"
+      password: "{{ mysql_root_password }}"
+      priv: "*.*:ALL,GRANT"
+      state: absent
+    - name: "{{ mysql_root_user }}"
+      host: "localhost"
+      password: "{{ mysql_root_password }}"
+      priv: "*.*:ALL,GRANT"
+      state: present
+    - name: "{{ galera_sst_user }}"
+      host: '%'
+      password: "{{ galera_sst_password }}"
+      priv: "*.*:USAGE"
+      state: present
+    - name: "{{ galera_sst_user }}"
+      host: 'localhost'
+      password: "{{ galera_sst_password }}"
+      priv: "*.*:ALL"
+      state: present
+    - name: "{{ mysql_application_user }}"
+      host: '%'
+      password: "{{ mysql_application_password }}"
+      priv: "{{ application_databases | zip_longest([], fillvalue='.*:ALL') | map('join') | join('/')}}"
+      state: present
+  notify:  MySQL upgrade
+  register: galera_users
+  until: galera_users | success
+  retries: 3
+  delay: 10
+  when: primary_node == 1 or cluster_configuration == "standalone"
+  run_once: true
+  no_log: false
+
+- name: Copy the root credentials as .my.cnf file
+  template: src=credentials.cnf.j2 dest=/root/.my.cnf mode=0600
+

@@ -1,0 +1,16 @@
+---
+# file: roles/install/kubernetes/tasks/main.yml
+
+- import_tasks: install.yml
+  when: kubernetes_master is true
+  become: yes
+  tags:
+  - helm_install
+
+- import_tasks: chart_install.yml
+  when: kubernetes_master is true
+  tags: 
+  - chart_install
+
+
+

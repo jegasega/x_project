@@ -1,0 +1,8 @@
+---
+
+- name: restart keepalived
+  service: name=keepalived state=restarted
+
+- name: restart snmpd
+  service: name=snmpd state=restarted
+

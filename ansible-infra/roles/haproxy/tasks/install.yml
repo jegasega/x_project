@@ -1,0 +1,20 @@
+---
+- include: install-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: install-Generic.yml
+  when: ansible_os_family != 'Debian'
+
+- name: Enabling and starting HAproxy service on non SystemD systems
+  service:
+    name=haproxy
+    state=started
+    enabled=yes
+  when: ansible_distribution_major_version < "7"
+
+- name: Enabling and starting HAproxy service on SystemD systems
+  systemd:
+    name=haproxy
+    state=started
+    enabled=yes
+  when: ansible_distribution_major_version >= "7"

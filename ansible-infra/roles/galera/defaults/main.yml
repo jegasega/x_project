@@ -1,0 +1,79 @@
+---
+
+primary_node: 0
+cluster_configuration: "cluster"
+garbd_node: 0
+bootstrap_allowed: 0
+mariadb_service_restart_allowed: "no"
+mariadb_release: "10.2"
+mariadb_package_state: "present"
+mariadb_max_files: 65536
+mariadb_max_processes: 65536
+centos_release: "{{ ansible_distribution_major_version }}" 
+selinux_state: "permissive"
+
+logrotate_folder: "/etc/logrotate.d"
+
+mysql_config_folder: "/opt/telia/my.cnf.d"
+application_dir: "/opt/uxp"
+mysql_initial_data_dir: "/var/lib/mysql"
+mysql_data_dir: "{{ application_dir }}/mysql"
+mysql_log_dir: "{{ application_dir }}/logs/mysql"
+mysql_connections_count: 15000
+mysql_wait_timeout: 300
+mysql_long_query_time: 0.1
+
+galera_wsrep_cluster_name: "galera_test_cluster"
+galera_sst_user: "sstuser"
+galera_sst_password: "sstpass"
+galera_slave_threads: 1
+galera_cluster_interface: "eth1"
+galera_cluster_interface_fact_var: ansible_{{ galera_cluster_interface }}
+galera_debug_status: "OFF"
+galera_replication_status: "on"
+
+# Galera WSREP provider_options
+# Defines the disk space you want to node to use in caching write-sets.
+galera_cache_size: "1G"
+# Define which network segment this node is in
+galera_segment_id: 0
+# Time to wait until allowing peer declared outside of stable view to reconnect.
+galera_gmcast_time_wait: "PT5S"
+# Determines whether gcache recovery takes place on node startup.
+# If gcache could be recovered successfully, the node can then provide IST to other joining nodes, 
+# which is useful when the whole cluster is being restarted.
+galera_gcache_recover: "yes"
+# Defines how often you want the node to check for peer inactivity.
+galera_evs_inactive_check_period: "PT1S"
+# Defines the inactivity period after which a node is suspected as dead.
+galera_evs_suspect_timeout: "PT5S"
+# Defines a hard limit on node inactivity, after which the node is pronounced dead.
+galera_evs_inactive_timeout: "PT15S"
+# Defines the maximum number of packets at a time in replication. 
+# For clusters implemented over WAN, you can set this value considerably higher
+galera_evs_send_window: 4
+# Defines the maximum number of data packets at a time in replication.
+# The recommended value is half evs.send_window.
+galera_evs_user_send_window: 2
+
+replication_expire_logs_days: 3
+replication_gtid_domain_id: 1
+
+innodb_pool_instances: 4
+innodb_buffer_size: "1024M"
+innodb_log_size: "256M"
+
+mysql_service_name_os: 
+  "6": "mysql"
+  "7": "mariadb"
+  "18": "mariadb"
+
+mysql_service_name: "{{ mysql_service_name_os[ansible_distribution_major_version] }}"
+
+mysql_root_user: "root"
+mysql_root_password: "Passw0rd"
+mysql_application_user: "application"
+mysql_application_password: "Passw0rd"
+
+application_databases: 
+  - "test"

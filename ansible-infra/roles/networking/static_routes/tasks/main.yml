@@ -1,0 +1,24 @@
+---
+- name: configure static routes for main interface
+  template:
+    src: "{{ item.purpose }}.j2"
+    dest: /etc/sysconfig/network-scripts/route-{{ item.interface }}
+    mode: 0644
+  with_items:
+    - purpose: route-main
+      interface: "{{ network_link.main }}"
+
+- name: configure static routes for management interface
+  template:
+    src: "{{ item.purpose }}.j2"
+    dest: /etc/sysconfig/network-scripts/route-{{ item.interface }}
+    mode: 0644
+  with_items:
+    - purpose: route-management
+      interface: "{{ network_link.management }}"
+
+- name: restart networking
+  service:
+    name: network
+    state: restarted
+  when: restart_enabled == True

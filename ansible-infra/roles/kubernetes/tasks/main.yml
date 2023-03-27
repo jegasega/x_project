@@ -1,0 +1,21 @@
+---
+# file: roles/install/kubernetes/tasks/main.yml
+
+- import_tasks: install.yml
+  tags: 
+  - kubeinstall
+  - kubernetes
+
+- import_tasks: install_master.yml
+  when: kubernetes_master is true and bootstrap_kubernetes_cluster is true
+  tags: 
+  - kubemaster
+  - kubernetes
+
+- import_tasks: install_node.yml
+  when: kubernetes_master is false and bootstrap_kubernetes_cluster is true
+  tags:
+  - kubenode
+  - kubernetes
+
+

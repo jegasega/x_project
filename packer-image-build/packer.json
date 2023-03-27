@@ -1,0 +1,71 @@
+{
+  "variables": {
+      "vm_name": "debian-11.0.0-amd64-js",
+      "numvcpus": "2",
+      "memsize": "2560",
+      "disk_size": "40960",
+      "iso_url": "https://gemmei.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-11.6.0-amd64-netinst.iso",
+      "iso_checksum": "e482910626b30f9a7de9b0cc142c3d4a079fbfa96110083be1d0b473671ce08d",
+      "ssh_username" : "vagrant",
+      "ssh_password" : "vagrant",
+      "boot_wait": "5s"
+    },
+    "builders": [
+      {
+        "type": "virtualbox-iso",
+        "boot_command": ["e<down><down><down><end>priority=critical auto=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<leftCtrlOn>x<leftCtrlOff>"],
+        "iso_interface": "sata",
+        "hard_drive_interface": "sata",
+        "sata_port_count": 2,
+        "boot_wait": "{{ user `boot_wait` }}",
+        "disk_size": "{{ user `disk_size` }}",
+        "headless": false,
+        "guest_os_type": "Debian_64",
+        "http_directory": "http",
+        "iso_checksum": "{{ user `iso_checksum` }}",
+        "iso_url": "{{ user `iso_url` }}",
+        "shutdown_command": "echo 'packer'|sudo -S shutdown -P now",
+        "ssh_password": "{{ user `ssh_password` }}",
+        "ssh_port": 22,
+        "ssh_username": "{{ user `ssh_username` }}",
+        "ssh_timeout": "30m",
+        "vm_name": "{{ user `vm_name` }}",
+
+        "vboxmanage": [
+          ["modifyvm", "{{.Name}}", "--memory", "{{ user `memsize` }}"],
+          ["modifyvm", "{{.Name}}", "--cpus", "{{ user `numvcpus` }}"],
+          ["modifyvm", "{{.Name}}", "--firmware", "EFI"]
+        ]
+      }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'packer'|{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "inline": [
+        "apt -y update && apt -y upgrade",
+        "apt -y install python3-pip",
+        "pip3 --no-cache-dir install ansible"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "../ansible-infra/setup.yml",
+      "role_paths": [
+        "../ansible-infra/roles/os",
+        "../ansible-infra/roles/ntp",
+        "../ansible-infra/roles/kubernetes"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'packer'|{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": ["scripts/cleanup.sh"]
+    }
+  ],
+  "post-processors": [{
+    "type": "vagrant",
+    "compression_level": "8",
+    "output": "{{ user `vm_name` }}.box"
+  }]
+}

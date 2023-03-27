@@ -1,0 +1,10 @@
+# Config rotating catalina and mysql hourly and keeping 15 days log
+/opt/uxp/apps/tomcat-platform/logs/catalina.out /opt/uxp/apps/tomcat-platform/logs/localhost_access_platform.log /opt/uxp/apps/tomcat-entitlements/logs/catalina.out /opt/uxp/apps/tomcat-entitlements/logs/localhost_access_platform.log /opt/uxp/apps/tomcat-csr/logs/catalina.out /opt/uxp/apps/tomcat-csr/logs/localhost_access_csr.log /opt/uxp/apps/tomcat-admin/logs/catalina.out /opt/uxp/apps/tomcat-admin/logs/localhost_access_admin.log /var/log/mysql/*.err /var/log/mysql/*-slow.log /opt/uxp/apps/mint-logstash/logs/logstash.log /opt/uxp/apps/mint-logstash/logs/logstash.err /opt/uxp/apps/mint-logstash-forwarder/logs/logstash-forwarder.err /opt/uxp/apps/mint-logstash-forwarder/logs/logstash-forwarder.log {
+        copytruncate
+        missingok
+        rotate 360
+        maxage 15
+        compress
+        dateext
+        dateformat -%Y-%m-%d-%s.log
+}

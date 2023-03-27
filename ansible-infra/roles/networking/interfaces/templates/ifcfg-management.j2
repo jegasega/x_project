@@ -1,0 +1,12 @@
+# ETH1 - {{ ansible_managed }}
+
+BOOTPROTO=none
+DEVICE={{ item.interface }}
+GATEWAY={{ network.management['gateway_internet'] }}
+IPADDR={{ ip4_address_management }}
+NM_CONTROLLED=no
+ONBOOT=yes
+PREFIX={{ network.management['prefix'] }}
+TYPE=Ethernet
+UUID=5129b645-da1a-43a5-b225-b9a78c536796
+ZONE=public

@@ -1,0 +1,11 @@
+---
+- name: Bootstrap server
+  hosts: all
+  serial: 1
+  roles:
+    - { role: os, become: yes}
+    - { role: ntp, become: yes }
+    - { role: users_login, become: yes }
+    - { role: kubernetes, become: yes }
+    - { role: helm_install, become: no }
+...

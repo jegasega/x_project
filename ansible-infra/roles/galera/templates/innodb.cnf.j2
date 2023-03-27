@@ -1,0 +1,44 @@
+# {{ ansible_managed }}
+
+[mysqld]
+# Enables "interleaved" auto incrementing lock mode, preventing INSERT-like statements from locking the auto-increment counter
+innodb_autoinc_lock_mode=2
+
+# Ignore client when it specify MyISAM tables and use innodb engine all the time.  This need mariaDB 10.1.4
+#enforce_storage_engine=InnoDB
+
+# Sets the number of instances which the InnoDB buffer pool is split into. Default: 4
+innodb_buffer_pool_instances={{ innodb_pool_instances }}
+
+# Sets the maximum size of the InnoDB buffer pool - this should be 75% of the total system memory. Default: 1024M
+innodb_buffer_pool_size = {{ innodb_buffer_size }}
+
+# Enables writing to separate files for each table in InnoDB
+innodb_file_per_table
+
+# Sets the method in which dirty pages bypass filesystem cache
+innodb_flush_method=O_DIRECT
+
+# Disables InnoDB gap key locking
+innodb_locks_unsafe_for_binlog=1
+
+# The number of seconds between dumps of the InnoDB buffer pool to disk
+#innodb_buffer_pool_restore_at_startup=600
+
+# Sets the size of the redo log (the log files must be removed after changing this value). Default: 256M
+innodb_log_file_size={{ innodb_log_size }}
+
+# Sets the number of redo log files used by InnoDB
+innodb_log_files_in_group=4
+
+# Sets InnoDB to flush the redo log every second (instead of every commit)
+innodb_flush_log_at_trx_commit=2
+
+# Required for Maria 10.1 galera replication
+innodb_doublewrite=1
+
+# Required to allow index key prefixes longer than 767 bytes
+{% if mariadb_release == '10.2' %}
+innodb_file_format = Barracuda
+innodb_large_prefix = ON
+{% endif %}

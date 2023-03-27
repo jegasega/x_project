@@ -1,0 +1,6 @@
+# Rendered by Ansible for {{ ansible_hostname }}
+domain {{ local_domain_name }}
+search {{ search_domains|join(' ') }}
+{% for nameserver in nameservers%}
+nameserver {{ nameserver }}
+{% endfor %}

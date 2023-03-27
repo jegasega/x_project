@@ -1,0 +1,13 @@
+---
+
+# Adding MariaDB repository key
+- name: Add an apt key by id from a keyserver
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 36A1D7869245C8950F966E92D8576A8BA88D21E9
+
+# Add MariaDB repository into sources list.
+- name: Adding MariaDB APT repository
+  apt_repository: 
+    repo: deb [arch=amd64] http://mariadb.mirror.serveriai.lt/repo/10.4/ubuntu bionic main
+    state: present

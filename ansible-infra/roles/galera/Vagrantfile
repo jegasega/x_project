@@ -1,0 +1,21 @@
+Vagrant.configure("2") do |config|
+
+  (1..4).each do |i|
+    config.vm.define "db-#{i}" do |db|
+      db.ssh.insert_key = false
+      db.vm.box = "centos/7"
+      db.vm.box_check_update = true
+      db.vm.hostname = "linux.local"
+      db.vm.network(:private_network, {
+        ip: "192.168.49.2#{i}",
+        auto_config: true
+      })
+      db.vm.provision "shell", inline: <<-SHELL
+        ifup eth1
+        hostnamectl set-hostname db-#{i}
+        hostnamectl status
+        echo "db-#{i}" >> /etc/hostname
+      SHELL
+    end
+  end
+end

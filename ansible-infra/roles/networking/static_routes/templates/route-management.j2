@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+
+{% if network_name in ['admin', 'platform'] %}
+# Additional static routes to special servers
+{% for target in static_routes_management %}
+#{{ target.address }} via {{ network.management.gateway_internet }} dev {{ network_link.management }}
+{% endfor %}
+{% endif %}

@@ -1,0 +1,18 @@
+---
+# file: roles/open_vm_tools/tasks/service.yml
+
+- name: Enabling and starting NTP service on non SystemD systems
+  service:
+    name=ntpd
+    state=started
+    enabled=yes
+  when: ansible_distribution_major_version < "7" and ansible_distribution == 'Centos'
+
+- name: Enabling and starting NTP service on Centos SystemD
+  systemd:
+    name: "{{ ntp_service_name }}"
+    state: "started"
+    enabled: "yes"
+  when: ansible_distribution == 'CentOS' or  ansible_distribution == 'Debian'
+
+

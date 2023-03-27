@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+
+# Route to shared network for inter-service communication
+{{ shared_network }} via {{ network[network_name]['gateway'] }} dev {{ network_link.main }}
+
+{% if network_name == 'database' %}
+# Route to remote High Availability DB Replica Cluster Network
+{{ network[network_name]['remote_ha_db_network'] }} via {{ network[network_name]['gateway'] }} dev {{ network_link.main }}
+{% endif %}
+
+{% if network_name in ['admin', 'platform', 'proxy'] %}
+# Additional static routes to special servers
+{% for target in static_routes_main %}
+{{ target.address }} via {{ network[network_name]['gateway'] }} dev {{ network_link.main }}
+{% endfor %}
+
+{% endif %}
+

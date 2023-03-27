@@ -1,0 +1,7 @@
+---
+# file: roles/haproxy/handlers/main.yml
+
+- name: Restart Xinetd daemon
+  service:
+    name=xinetd
+    state=restarted

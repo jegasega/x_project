@@ -1,0 +1,81 @@
+---
+
+- name: Configuring security settings
+  import_tasks: galera_security.yml
+  tags:
+  - setup
+
+- name: Adding necessary repositories
+  import_tasks: galera_repos.yml
+  tags:
+  - setup
+
+- name: Installing packages
+  import_tasks: galera_packages.yml
+  tags:
+  - setup
+
+- name: Adding custom facts
+  import_tasks: galera_facts.yml
+  tags:
+  - setup
+  - bootstrap
+  when: garbd_node == 0
+
+- name: Creating necessary folders
+  import_tasks: galera_folders.yml
+  tags:
+  - setup
+
+- name: MySQL/Galera configuration tasks
+  import_tasks: galera_config.yml
+  tags:
+  - config
+  when: garbd_node == 0
+
+- name: Garbd configuration tasks
+  import_tasks: garbd_config.yml
+  tags:
+  - config
+  - garbd
+  when: garbd_node == 1
+
+- name: Galera Pre-bootstrap tasks
+  import_tasks: galera_pre_bootstrap.yml
+  tags:
+  - bootstrap
+  when: garbd_node == 0
+
+- name: Creating necessary MySQL privileges
+  import_tasks: galera_privileges.yml
+  tags:
+  - credentials
+  - bootstrap
+  when: garbd_node == 0
+
+- name: Setting SystemD limits
+  import_tasks: galera_limits.yml
+  tags:
+  - setup
+  when: ansible_distribution_major_version >= 7
+
+- name: Mysql service control
+  import_tasks: mysql_service.yml
+  tags:
+  - bootstrap
+  - service
+  when: garbd_node == 0
+
+- name: Garbd service control
+  import_tasks: garbd_service.yml
+  tags:
+  - garbd
+  when: garbd_node == 1
+
+- name: Galera Post-bootstrap tasks
+  import_tasks: galera_post_bootstrap.yml
+  tags:
+  - bootstrap
+  when: garbd_node == 0
+
+

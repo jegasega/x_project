@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+# NTP service configuration
+
+driftfile /var/lib/ntp/drift
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+
+restrict  {{ allow_network }}
+restrict -6 ::1
+
+{% for ntp_server in ntp_servers%}
+server {{ ntp_server }}
+{% endfor %}
+
+includefile /etc/ntp/crypto/pw
+keys /etc/ntp/keys

@@ -1,0 +1,9 @@
+---
+
+kubernetes_service_restart: "yes"
+containerd_version: "1.6.15-1"
+kubernetes_version: "1.25.6-00"
+cni_plugin_version: "1.1.1"
+kubernetes_master: false
+bootstrap_kubernetes_cluster: false
+

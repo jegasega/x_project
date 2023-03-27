@@ -1,0 +1,19 @@
+---
+
+# Starting Galera cluster in a bootstrap mode on Centos 6
+  - name: Starting Galera cluster in a bootstrap mode
+    command: /etc/init.d/mysql bootstrap
+    when: primary_node == 1 and bootstrap_allowed == 1 and galera_replication_status == "on" and groups['all_db_servers']|map('extract', hostvars, ['ansible_local','galera','service_status'])|select('equalto', 'running')|list|length < 1 and ansible_local.galera.bootstrap_mode != 'active' and  ansible_distribution_major_version < '7'
+
+# Starting Galera cluster in a bootstrap mode on Centos 7
+  - name: Starting Galera in a bootsrap mode on Centos 7
+    block:
+      - command: systemctl set-environment _WSREP_NEW_CLUSTER=\'--wsrep-new-cluster\'
+      - service:
+          name: "{{ mysql_service_name }}"
+          state: started
+      - command: systemctl set-environment _WSREP_NEW_CLUSTER=\'\' 
+    when: primary_node == 1 and bootstrap_allowed == 1 and galera_replication_status == "on" and groups['all_db_servers']|map('extract', hostvars, ['ansible_local','galera','service_status'])|select('equalto', 'running')|list|length < 1 and ansible_local.galera.bootstrap_mode != 'active' and  ansible_distribution_major_version >= '7'
+ 
+  - name: "Re-run setup to update custom facts"
+    setup: ~

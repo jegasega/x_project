@@ -1,0 +1,11 @@
+---
+- name: Configure nginx status page
+  template:
+      src: nginx_status.j2
+      dest: /etc/nginx/conf.d/nginx-status.conf
+      backup: yes
+      owner: root
+      group: root
+      mode: 0664
+  notify:
+      - reload_nginx_status

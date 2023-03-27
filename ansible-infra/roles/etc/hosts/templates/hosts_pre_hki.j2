@@ -1,0 +1,74 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+# tibco hack
+10.18.41.138 tsfjmst1.extra.sonera.fi
+
+{% if ulm_service.name == "platform" %}
+#hack for wrong MIT name in config
+10.18.41.138    ua001colossus.ddc.teliasonera.net
+10.18.41.138    mit-prod
+10.18.41.138    electron-preprod
+10.18.41.138    smtp.tele.fi
+{% elif ulm_service.name == "admin" %}
+#hack for wrong MIT name in config
+10.18.41.171    ua001colossus.ddc.teliasonera.net
+10.18.41.171    mit-prod
+10.18.41.171    electron-preprod
+10.18.41.171    smtp.tele.fi
+{% endif %}
+
+### APPLICATION NETWORK:
+10.18.41.132   platform1-pre.app
+10.18.41.133   platform2-pre.app
+10.18.41.134   platform3-pre.app
+10.18.41.135   platform4-pre.app
+10.18.41.136   platform5-pre.app
+
+10.18.41.164   admin1-pre.app
+10.18.41.165   admin2-pre.app
+10.18.41.166   admin3-pre.app
+
+10.18.41.196   db1-pre.app
+10.18.41.197   db2-pre.app
+10.18.41.198   db3-pre.app
+10.18.41.199   db4-pre.app
+
+
+10.18.41.100   proxy1-pre.app
+10.18.41.101   proxy2-pre.app
+10.18.41.102   proxy3-pre.app
+
+10.18.41.228   elk1-pre.app
+10.18.41.229   uxdr2-pre.app
+10.18.41.230   elk3-pre.app
+
+10.18.41.206   nfs1-pre.app
+
+### MANAGEMENT NETWORK:
+10.18.40.231   platform1-pre.hki platform1-pre.hki.ulm.id.telia.fi
+10.18.40.232   platform2-pre.hki platform2-pre.hki.ulm.id.telia.fi
+10.18.40.233   platform3-pre.hki platform3-pre.hki.ulm.id.telia.fi
+10.18.40.234   platform4-pre.hki platform4-pre.hki.ulm.id.telia.fi
+10.18.40.235   platform5-pre.hki platform5-pre.hki.ulm.id.telia.fi
+
+10.18.40.236   admin1-pre.hki admin1-pre.hki.ulm.id.telia.fi
+10.18.40.237   admin2-pre.hki admin2-pre.hki.ulm.id.telia.fi
+10.18.40.238   admin3-pre.hki admin3-pre.hki.ulm.id.telia.fi
+
+10.18.40.239   db1-pre.hki
+10.18.40.240   db2-pre.hki
+10.18.40.241   db3-pre.hki
+10.18.40.242   db4-pre.hki
+
+10.18.40.244   elk1-pre.hki
+10.18.40.245   uxdr2-pre.hki
+10.18.40.246   elk3-pre.hki
+
+10.18.40.247  nfs1-pre.hki
+
+10.18.40.228   proxy1-pre.hki
+10.18.40.229   proxy2-pre.hki
+10.18.40.230   proxy3-pre.hki
+
+10.18.40.248   zabbix1-pre.hki zabbix1-pre.hki.management.id.telia.fi

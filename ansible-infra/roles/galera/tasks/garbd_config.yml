@@ -1,0 +1,13 @@
+---
+
+- stat: path={{ mysql_log_dir }}/{{ ansible_hostname }}.err
+  register: mysql_log_file
+
+- name: Add main MySQL configuration file
+  template: src=garbd.cnf.j2 dest=/etc/sysconfig/garb
+    owner=root group=root mode=0644
+  notify: Restart Garbd service on cluster node
+
+- name: Create log file
+  file: path={{ mysql_log_dir }}/{{ ansible_hostname }}.err state=touch owner=nobody group=nobody mode=0644
+  when: mysql_log_file.stat.exists == False

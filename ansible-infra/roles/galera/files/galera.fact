@@ -1,0 +1,40 @@
+#!/bin/bash
+# Copyright (C) 2018 Telia Company
+# Created by JS
+
+# Checking for the MySQL service running in a cluster bootstrap mode
+
+echo "{"
+if ps auxx | grep -Eq [m]ysqld.*wsrep-new-cluster; then
+  echo "\"bootstrap_mode\" : \"active\","
+else
+  echo "\"bootstrap_mode\" : \"no\","
+fi
+
+# Checking for the galera cluster status
+
+CLUSTER_SIZE=$( /usr/bin/mysql -Nse "show global status like 'wsrep_cluster_size'" 2>/dev/null | awk '{print $2}' )
+CLUSTER_STATE=$( /usr/bin/mysql -Nse "show global status like 'wsrep_local_state_comment'" 2>/dev/null | awk '{print $2}' )
+CLUSTER_STATUS=$( /usr/bin/mysql -Nse "show global status like 'wsrep_cluster_status'" 2>/dev/null | awk '{print $2}' )
+
+echo "\"cluster_size\" : \"${CLUSTER_SIZE}\","
+echo "\"cluster_state\" : \"${CLUSTER_STATE}\","
+echo "\"cluster_status\" : \"${CLUSTER_STATUS}\","
+
+# Checking for the galera provisioner status
+
+if /usr/sbin/ss -nlpt | grep -qE '4567.*mysqld'; then
+  echo "\"service_status\" : \"running\","
+else
+  echo "\"service_status\" : \"stopped\","
+fi
+
+# Checking for MySQL service status
+
+if /sbin/service mysql status | grep -q 'running' && /usr/sbin/ss -nlpt | grep -qE '3306.*mysqld'; then
+  echo "\"mysql_status\" : \"running\""
+else
+  echo "\"mysql_status\" : \"stopped\""
+fi
+
+echo "}"

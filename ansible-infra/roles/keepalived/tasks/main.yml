@@ -1,0 +1,64 @@
+---
+# This role installs and sets up keepalived
+
+- name: Install keepalived (Centos)
+  yum: name=keepalived state=present
+  when: ansible_os_family == "RedHat"
+  tags: keepalived
+  notify: restart keepalived
+
+- name: Install snmp daemon
+  yum: name=net-snmp state=present
+  when: ansible_os_family == "RedHat" and keepalived_monitoring_enabled == "yes"
+  tags: keepalived
+
+- name: Install snmp utilities
+  yum: name=net-snmp-utils state=present
+  when: ansible_os_family == "RedHat" and keepalived_monitoring_enabled == "yes"
+  tags: keepalived
+
+- name: Install keepalived (debian/ubuntu)
+  apt: name=keepalived state=latest
+  when: ansible_os_family == "Debian"
+  tags: keepalived
+  notify: restart keepalived
+
+- name: Writing chk_service script
+  template: 
+    src: check_script.sh.j2 
+    dest: /etc/keepalived/check_script.sh
+    mode: 0755
+    owner: root
+    group: root
+  tags: keepalived
+  notify: restart keepalived
+
+- name: Writing keepalived configuration file
+  template: src=keepalived.conf.j2 dest=/etc/keepalived/keepalived.conf
+  tags: keepalived
+  notify: restart keepalived
+
+- name: Writing SNMP configuration file
+  template: src=snmp.conf.j2 dest=/etc/snmp/snmp.conf
+  tags: keepalived
+  notify: restart snmpd
+  when: ansible_os_family == "RedHat" and keepalived_monitoring_enabled == "yes"
+
+- name: Writing SNMP daemon configuration file
+  template: src=snmpd.conf.j2 dest=/etc/snmp/snmpd.conf
+  tags: keepalived
+  notify: restart snmpd
+  when: ansible_os_family == "RedHat" and keepalived_monitoring_enabled == "yes"
+
+- name: Writing keepalived sysconfig file
+  template: src=keepalived_sysconfig.j2 dest=/etc/sysconfig/keepalived
+  tags: keepalived
+  notify: restart keepalived
+
+- name: Start keepalived
+  service: name=keepalived state=started
+  tags: keepalived
+
+- name: Start snmpd
+  service: name=snmpd state=started
+  tags: keepalived

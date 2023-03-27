@@ -1,0 +1,15 @@
+---
+
+- name: Ensure logrotate package is present
+  package:
+    name: logrotate
+    state: present
+  register: pkg_result
+  until: pkg_result is success
+
+- name: add logrotate configuration for audispd log
+  template:
+    src: logrotate-audispd.j2
+    dest: "{{ logrotate_folder }}/audispd"
+    mode: '0644'
+    validate: 'logrotate -dv %s'

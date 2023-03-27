@@ -1,0 +1,8 @@
+---
+# file: roles/haproxy/tasks/install_xinetd.yml
+- name: install XinetD
+  yum:
+    name=xinetd
+    state=present
+  tags: xinetd_install
+  when: ansible_distribution_major_version < '7'

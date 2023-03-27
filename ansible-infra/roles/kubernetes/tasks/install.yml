@@ -1,0 +1,107 @@
+---
+
+# file: roles/install/kubernetes/tasks/install.yml
+- name: Install Docker repo GPG key
+  block:
+    - name: download Docker apt key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: configure Docker apt repo
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64 ] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+        state: present
+
+- name: Install Kubernetes repo
+  block:
+    - name: Add an APT Kubernetes repo key
+      ansible.builtin.apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+    - name: configure Kubernetes apt repo
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64] https://packages.cloud.google.com/apt kubernetes-xenial main"
+        state: present
+
+- name: Install Containerd related packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - "containerd.io={{ containerd_version }}"
+
+- name: Hold containerd.io package
+  ansible.builtin.dpkg_selections:
+    name: containerd.io
+    selection: hold
+
+- name: Create a directory for CNI plugin
+  ansible.builtin.file:
+    path: /opt/cni/bin
+    state: directory
+    mode: '0755'
+
+- name: Install CNI plugin
+  ansible.builtin.unarchive:
+    src: "https://github.com/containernetworking/plugins/releases/download/v{{ cni_plugin_version }}/cni-plugins-linux-amd64-v{{ cni_plugin_version }}.tgz"
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Configure containerd
+  template:
+    src:  etc.containerd.config.toml.j2
+    dest: '/etc/containerd/config.toml'
+  notify: containerd_restart
+
+- name: Install Kubernetes related packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - "kubelet={{ kubernetes_version }}"
+    - "kubeadm={{ kubernetes_version }}"
+    - "kubectl={{ kubernetes_version }}"
+  tags:
+  - kubeinstall
+
+- name: Hold Kubelet package version
+  ansible.builtin.dpkg_selections:
+    name: kubelet
+    selection: hold
+  tags:
+  - kubeinstall
+
+- name: Hold Kubeadm package version
+  ansible.builtin.dpkg_selections:
+    name: kubeadm
+    selection: hold
+  tags:
+  - kubeinstall
+
+- name: Hold Kubectl packages version
+  ansible.builtin.dpkg_selections:
+    name: kubectl
+    selection: hold
+  tags:
+  - kubeinstall
+
+- name: Kubelet environment file creation
+  template:
+    src: etc.default.kubelet.j2
+    dest: '/etc/default/kubelet'
+  notify: kubelet_restart
+  when: bootstrap_kubernetes_cluster is true
+
+- name: Enabling and starting Kubelet service
+  systemd:
+    name: "kubelet"
+    enabled: "yes"
+    state: "started"
+
+- name: Enabling and starting Containerd service
+  systemd:
+    name: "containerd"
+    enabled: "yes"
+    state: "started"

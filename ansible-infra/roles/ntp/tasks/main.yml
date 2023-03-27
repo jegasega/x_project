@@ -1,0 +1,17 @@
+---
+# file: roles/install/ntp/tasks/main.yml
+
+# Variable setup.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include_tasks: install.yml
+  tags: [ ntp_install ]
+
+- include_tasks: service.yml
+  tags: [ ntp_service ]
+
+- include_tasks: config.yml
+  tags: [ ntp_config ]
+
+

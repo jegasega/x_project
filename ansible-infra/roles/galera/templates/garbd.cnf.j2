@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+# This config file is to be sourced by garb service script.
+
+# A comma-separated list of node addresses (address[:port]) in the cluster
+GALERA_NODES="{{ groups['all_db_servers'] | map('extract', hostvars, [galera_cluster_interface_fact_var,'ipv4','address']) | list | zip_longest([], fillvalue=':4567') | map('join') | join(',') }}"
+
+# Galera cluster name, should be the same as on the rest of the nodes.
+GALERA_GROUP="{{ galera_wsrep_cluster_name }}"
+
+# Optional Galera internal options string (e.g. SSL settings)
+# see http://galeracluster.com/documentation-webpages/galeraparameters.html
+GALERA_OPTIONS="gmcast.listen_addr=tcp://{{  hostvars[inventory_hostname]['ansible_' + galera_cluster_interface]['ipv4']['address'] }}:4567"
+
+# Log file for garbd. Optional, by default logs to syslog
+LOG_FILE={{ mysql_log_dir }}/{{ ansible_hostname }}.err

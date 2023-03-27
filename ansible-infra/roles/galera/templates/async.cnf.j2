@@ -1,0 +1,26 @@
+# {{ ansible_managed }}
+
+[mysqld]
+# Enable binary logging
+log_bin={{ galera_wsrep_cluster_name }}-bin
+
+# Ensures that updates received by a slave are written to the slave's binary log
+log_slave_updates=1
+
+# Server identifier (must be an integer unique to this node). Default: Last ipv4 address octet
+server_id="{{ hostvars[inventory_hostname]['ansible_' + galera_cluster_interface]['ipv4']['address'].split('.')[3] }}"
+
+#To avoid running out of disk space frequently. 
+expire_logs_days={{ replication_expire_logs_days }}
+
+# Domain ID for GTID based replication
+gtid_domain_id={{ replication_gtid_domain_id }}
+
+# Adding databases to the replication
+# https://severalnines.com/blog/how-set-asynchronous-replication-galera-cluster-standalone-mysql-server-gtid
+{% for database in application_databases %}
+binlog_do_db={{ database }}
+{% endfor %}
+
+
+

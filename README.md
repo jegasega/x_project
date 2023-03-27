@@ -1,4 +1,4 @@
-# дdb_homework
+# Test project
 
 ## Setup
 ```sh

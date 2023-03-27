@@ -1,0 +1,25 @@
+---
+auditd_rules_templates:
+  - 01-start
+  - 05-exclusions
+  - 10-audit-self
+  - 40-base
+  - 50-special
+  - 60-high_volume
+  - 90-extra
+  - 99-end
+auditd_rule_rootcmd_all: true
+
+# load at the end
+auditd_extra_rules: []
+
+auditd_buffer_size: 32768
+## mode 1 means logging of the failure events
+auditd_failure_mode: 1
+## ATTENTION! 2 implies any config changes require a system reboot (man auditctl)
+auditd_enable_flag: 2
+#auditd_enable_flag: 1
+osquery_process_auditing: false
+
+audit_log_file: '/var/log/audit/audit.log'
+logrotate_folder: '/etc/logrotate.d'

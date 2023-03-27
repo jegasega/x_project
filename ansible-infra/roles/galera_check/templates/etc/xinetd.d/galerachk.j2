@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+# default: on
+# description: galerachk
+service galerachk
+{
+        disable = no
+        flags = REUSE
+        socket_type = stream
+        port = {{ galera_check_port }}
+        wait = no
+        user = root
+        server = /usr/bin/clustercheck
+        log_on_failure += USERID
+        only_from = 0.0.0.0/0
+        per_source = UNLIMITED
+}

@@ -1,0 +1,12 @@
+---
+# file: roles/install/ntp/tasks/install.yml
+
+- name: Install NTP package on CentOS
+  yum: name=ntp state=latest
+  when: ansible_os_family == "CentOS"
+
+- name: Install NTP Package on Ubuntu/Debian
+  apt:
+    name: ntp
+    state: latest
+  when: ansible_os_family == "Debian"

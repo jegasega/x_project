@@ -1,0 +1,13 @@
+#!/bin/bash
+# Copyright (C) 2018 Telia Company
+# Created by JS
+
+# Checking for the galera cluster status on server 
+
+CLUSTER_SIZE=$( /usr/bin/mysql -Nse "show global status like 'wsrep_cluster_size'" 2>/dev/null | awk '{print $2}' )
+CLUSTER_STATE=$( /usr/bin/mysql -Nse "show global status like 'wsrep_local_state_comment'" 2>/dev/null | awk '{print $2}' )
+CLUSTER_STATUS=$( /usr/bin/mysql -Nse "show global status like 'wsrep_cluster_status'" 2>/dev/null | awk '{print $2}' )
+
+echo "{\"galera_cluster_size\" : \"${CLUSTER_SIZE}\"}"
+echo "{\"galera_cluster_state\" : \"${CLUSTER_STATE}\"}"
+echo "{\"galera_cluster_status\" : \"${CLUSTER_STATUS}\"}"

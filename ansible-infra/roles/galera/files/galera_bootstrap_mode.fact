@@ -1,0 +1,11 @@
+#!/bin/bash
+# Copyright (C) 2018 Telia Company
+# Created by JS
+
+# Checking for the MySQL service running in a cluster bootstrap mode
+
+if ps auxx | grep -Eq [m]ysqld.*wsrep-new-cluster; then
+  echo "{\"galera_bootstrap\" : \"active\"}"
+else
+  echo "{\"galera_bootstrap\" : \"no\"}"
+fi

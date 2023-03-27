@@ -1,0 +1,13 @@
+# Cache objects
+packer_cache/
+output-virtualbox-iso/
+output-vmware-iso/
+
+# Vagrant temp folder
+.vagrant/
+
+# Packer exe file
+packer.exe
+
+# For built boxes
+*.box

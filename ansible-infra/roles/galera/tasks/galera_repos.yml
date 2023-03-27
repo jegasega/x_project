@@ -1,0 +1,6 @@
+---
+
+- name: Importing repos depending on OS version
+  import_tasks: "{{ item }}"
+  with_fileglob:
+    - repos/{{ ansible_distribution }}/*.yml

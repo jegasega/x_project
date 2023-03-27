@@ -1,0 +1,11 @@
+# {{ item.interface | upper }} - {{ ansible_managed }}
+
+BOOTPROTO=none
+DEVICE={{ item.interface }}
+IPADDR={{ ip4_address | default(omit) }}
+NM_CONTROLLED=no
+ONBOOT=yes
+PREFIX={{ network[network_name]['prefix'] }}
+TYPE=Ethernet
+UUID=9626d98a-36b0-4743-8281-b51c2275fdd5
+ZONE=public

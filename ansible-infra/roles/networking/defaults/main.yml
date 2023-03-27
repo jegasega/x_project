@@ -1,0 +1,5 @@
+---
+network_link:
+  management: eth1
+  main: eth2
+reboot: "yes"

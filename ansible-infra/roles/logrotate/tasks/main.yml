@@ -1,0 +1,35 @@
+---
+- name: install cron
+  yum:
+      name: crontabs
+      state: present
+      disablerepo: "*"
+      enablerepo: "base,updates"
+
+- name: check/install hourly logrotate
+  template:
+      src: logrotate
+      dest: /etc/cron.hourly/logrotate
+      mode: 0700
+
+- name: check/install logrotate.hourly.conf
+  template:
+      src: logrotate.hourly.conf
+      dest: /etc/logrotate.hourly.conf
+
+- name: check/create logrotate.hourly.d directory
+  file:
+      path: /etc/logrotate.hourly.d
+      state: directory
+
+- name: check/install uxp components for logrotate
+  template:
+      src: uxplogrotate
+      dest: /etc/logrotate.hourly.d/uxplogrotate
+      mode: 0700
+
+- name: check/install nginx components for logrotate
+  template:
+      src: nginxlogrotate
+      dest: /etc/logrotate.d/nginx
+      mode: 0700

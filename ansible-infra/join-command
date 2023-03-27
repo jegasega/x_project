@@ -1,0 +1,1 @@
+kubeadm join 192.168.49.31:6443 --token kmajop.iz0a3p3m8n0aedfk --discovery-token-ca-cert-hash sha256:f3c1a8db12778d37fc83750810dcbb6501aafe9fe5833c2e69e909565c0457c1 

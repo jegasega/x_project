@@ -1,0 +1,155 @@
+---
+- name: "Setup.yml"
+  hosts: "localhost"
+  gather_facts: yes
+  become: yes
+  tasks:
+  - name: Colorize root shell prompt
+    blockifile:
+      path: /root/.bashrc
+      block: |
+        parse_git_branch() {
+          git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+        }
+        export PS1="\[\033[38;5;11m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\h:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+
+  - name: Alias vi to vim
+    lineinfile:
+      path: /root/.bashrc
+      line: "alias vi='vim'"
+      state: present
+
+  - name: Create vim configuration file
+    file:
+      path: /root/.vimrc
+      state: touch
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Configure vim
+    blockinfile:
+      path: /root/.vimrc
+      block: |
+        set nocompatible
+        syntax on
+        highlight Comment ctermfg=LightCyan
+      marker: ""
+      state: present
+
+  - name: Create .ssh folder for vagrant user
+    ansible.builtin.file:
+      path: /home/vagrant/.ssh
+      owner: vagrant
+      group: vagrant
+      state: directory
+      mode: '0700'
+
+  - name: Add insecure SSH key to the authorized keys
+    copy:
+      content: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key'
+      dest: /home/vagrant/.ssh/authorized_keys
+      mode: '0600'
+      owner: vagrant
+      group: vagrant
+      force: yes
+
+  - name: Disable quiet boot mode
+    lineinfile:
+      path: /etc/default/grub
+      regexp: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet"'
+      line: 'GRUB_CMDLINE_LINUX_DEFAULT=""'
+      state: present
+
+  - name: Update grub2
+    command: update-grub2
+
+  - name: Create EFI boot script
+    copy:
+      content: '\EFI\debian\grubx64.efi'
+      dest: /boot/efi/startup.nsh
+      force: yes
+    when:
+      - ansible_virtualization_type == "virtualbox"
+
+  - name: Install packages
+    apt:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - ccze
+      - lsof
+      - strace
+      - curl
+      - net-tools
+      - tcpdump
+      - vim
+
+  - name: Upgrade all packages
+    apt:
+      update_cache: yes
+      upgrade: dist
+
+
+  - name: Install dependencies for VirtualBox Guest Additions
+    apt:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - dkms
+      - make
+      - "linux-headers-{{ ansible_kernel }}"
+    when:
+      - ansible_virtualization_type == "virtualbox"
+
+  - name: Mount VBoxGuestAdditions.iso
+    mount:
+      path: /mnt
+      src: /home/vagrant/VBoxGuestAdditions.iso
+      fstype: iso9660
+      opts: ro,loop
+      state: mounted
+    when: ansible_virtualization_type == "virtualbox"
+
+  - name: Install VBoxGuestAdditions.iso
+    command: sh /mnt/VBoxLinuxAdditions.run
+    register: vbox_result
+    failed_when: "'Running kernel modules will not be replaced until \nthe system is restarted' not in vbox_result.stdout"
+    when: ansible_virtualization_type == "virtualbox"
+
+  - name: Umount VBoxGuestAdditions.iso
+    mount:
+      path: /mnt
+      state: absent
+    when: ansible_virtualization_type == "virtualbox"
+
+  - name: Delete VBoxGuestAdditions.iso
+    file:
+      path: /home/packer/VBoxGuestAdditions.iso
+      state: absent
+    when: ansible_virtualization_type == "virtualbox"
+
+  - name: Uninstall unnecessary packages
+    apt:
+      name: "{{ packages }}"
+      state: absent
+    vars:
+      packages:
+      - make
+      - "linux-headers-{{ ansible_kernel }}"
+    when:
+      - ansible_virtualization_type == "virtualbox"
+
+  - name: Install open-vm-tools
+    apt:
+      name: open-vm-tools
+      state: latest
+    when:
+      - ansible_virtualization_type == "VMware"
+
+  roles:
+    - { role: os, become: yes}
+    - { role: ntp, become: yes }
+    - { role: kubernetes, become: yes }

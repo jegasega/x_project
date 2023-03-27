@@ -1,0 +1,20 @@
+---
+- name: Restart Mysql service on cluster node
+  service: name={{ mysql_service_name }} state=restarted
+  when: ansible_local.galera.bootstrap_mode != "active" and ansible_local.galera.cluster_size > 1 and ansible_local.galera.service_status == 'running' and mariadb_service_restart_allowed == "yes"
+
+- name: Restart Garbd service on cluster node
+  service: name=garb state=restarted
+  when: garbd_node == 1
+
+- name: MySQL upgrade
+  command: "/usr/bin/mysql_upgrade -h localhost"
+  register: galera_mysql_upgrade
+  changed_when:
+    - not galera_mysql_upgrade.stdout is search("already upgraded")
+  until: galera_mysql_upgrade is success
+  retries: 3
+  delay: 10
+
+- name: SystemD Daemon reload
+  command: "systemctl daemon-reload"

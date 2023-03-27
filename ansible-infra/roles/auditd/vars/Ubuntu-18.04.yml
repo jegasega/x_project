@@ -1,0 +1,4 @@
+---
+
+auditd_pkg: auditd
+auditd_confdir: /etc/audit/rules.d

@@ -1,0 +1,25 @@
+---
+
+- name: Creating Galera Check configuration file
+  template:
+    src: galera-check.conf.j2
+    dest: /etc/sysconfig/clustercheck
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Creating Galera Check binary file
+  copy:
+    src: clustercheck
+    dest: /usr/bin/clustercheck
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Adding check port to the /etc/services
+  lineinfile:
+    path: /etc/services
+    line: "galerachk       {{ galera_check_port }}/tcp                # port for Galera Cluster Check"
+  notify: Restart Xinetd daemon
+  when: ansible_distribution_major_version < '7'
+

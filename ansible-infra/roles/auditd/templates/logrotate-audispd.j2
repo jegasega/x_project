@@ -1,0 +1,12 @@
+{{ ansible_managed | comment }}
+## /etc/logrotate.d/audispd
+{{ audit_log_file }} {
+    rotate {{ auditd_logrotate_days | default(30) | int }}
+    daily
+    missingok
+    notifempty
+    delaycompress
+    compress
+    create 640 root adm
+    sharedscripts
+}

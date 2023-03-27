@@ -1,0 +1,19 @@
+---
+- name: Install MariaDB server packages
+  package: 
+    name: "{{ item }}" 
+    state: "{{ mariadb_package_state }}"
+  with_items:
+    - MariaDB-client
+    - MariaDB-server
+
+- name: Install MariaDB backup
+  package: 
+    name: [ 'MariaDB-backup', 'socat' ] 
+    state: present
+  when: "mariadb_server_version is version('10.2.14', '>')"
+
+- name: Install MySQL-python
+  package: 
+    name: "MySQL-python" 
+    state: present

@@ -1,0 +1,9 @@
+---
+
+# Restart Mysql node in normal mode
+#
+ - name: Restart mysql service in normal mode
+   service:
+     name: mysql
+     state: restarted
+   when: primary_node == 1 and ansible_local.galera.bootstrap_mode == "active" and ansible_local.galera.cluster_size | int > 1
