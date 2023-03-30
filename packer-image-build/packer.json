@@ -13,10 +13,7 @@
     "builders": [
       {
         "type": "virtualbox-iso",
-        "boot_command": ["e<down><down><down><end>priority=critical auto=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<leftCtrlOn>x<leftCtrlOff>"],
-        "iso_interface": "sata",
-        "hard_drive_interface": "sata",
-        "sata_port_count": 2,
+        "boot_command": ["e<down><down><down><end>priority=high DEBIAN_FRONTEND=text auto=true preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<leftCtrlOn>x<leftCtrlOff>"],
         "boot_wait": "{{ user `boot_wait` }}",
         "disk_size": "{{ user `disk_size` }}",
         "headless": false,
@@ -30,10 +27,11 @@
         "ssh_username": "{{ user `ssh_username` }}",
         "ssh_timeout": "30m",
         "vm_name": "{{ user `vm_name` }}",
-
+        "iso_interface": "sata",
         "vboxmanage": [
           ["modifyvm", "{{.Name}}", "--memory", "{{ user `memsize` }}"],
           ["modifyvm", "{{.Name}}", "--cpus", "{{ user `numvcpus` }}"],
+	  ["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"],
           ["modifyvm", "{{.Name}}", "--firmware", "EFI"]
         ]
       }
