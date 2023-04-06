@@ -1,0 +1,4 @@
+https://docs.openshift.com/container-platform/4.9/networking/configuring_ingress_cluster_traffic/configuring-ingress-cluster-traffic-load-balancer.html
+https://www.youtube.com/watch?v=JDudDVoTx0w
+https://docs.openshift.com/container-platform/3.11/dev_guide/expose_service/expose_internal_ip_load_balancer.html
+

@@ -2,7 +2,7 @@
 
 set -e
 
-#export PACKER_LOG=1
+export PACKER_LOG=1
 if [[ -e ./output-virtualbox-iso ]];
 then
 

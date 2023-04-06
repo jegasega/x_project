@@ -5,4 +5,4 @@
 apt -y autoremove --purge
 apt-get clean
 
-sleep 600
+sleep 60
