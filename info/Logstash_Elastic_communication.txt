@@ -1,0 +1,273 @@
+qL..f..QHEAD / HTTP/1.1
+Connection: Keep-Alive
+Content-Type: application/json
+Host: elasticsearch-master:9200
+User-Agent: Logstash/8.5.1 (OS=Linux-5.10.0-21-amd64-amd64; JVM=Eclipse Adoptium-17.0.5) logstash-output-elasticsearch/11.9.3
+Accept-Encoding: gzip,deflate
+
+
+01:35:52.929188 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 267, win 17, options [nop,nop,TS val 1723039836 ecr 1900851962], length 0
+E..4..@.@.d.
+f._
+...#..`0g....\1...........
+f..\qL..
+01:35:54.098236 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [P.], seq 1:107, ack 267, win 17, options [nop,nop,TS val 1723041005 ecr 1900851962], length 106
+E.....@.@.d.
+f._
+...#..`0g....\1.....U.....
+f...qL..HTTP/1.1 200 OK
+X-elastic-product: Elasticsearch
+content-type: application/json
+content-length: 548
+
+
+01:35:54.098270 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [.], ack 107, win 16, options [nop,nop,TS val 1900853131 ecr 1723041005], length 0
+E..4Y.@.@..G
+...
+f._.`#...\10g.~...........
+qL..f...
+01:35:54.426854 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 267:551, ack 107, win 16, options [nop,nop,TS val 1900853460 ecr 1723041005], length 284
+E..PY.@.@..*
+...
+f._.`#...\10g.~...........
+qL..f...GET / HTTP/1.1
+Connection: Keep-Alive
+Content-Type: application/json
+Content-Length: 0
+Host: elasticsearch-master:9200
+User-Agent: Logstash/8.5.1 (OS=Linux-5.10.0-21-amd64-amd64; JVM=Eclipse Adoptium-17.0.5) logstash-output-elasticsearch/11.9.3
+Accept-Encoding: gzip,deflate
+
+
+01:35:54.426937 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 551, win 18, options [nop,nop,TS val 1723041334 ecr 1900853460], length 0
+E..4..@.@.d.
+f._
+...#..`0g.~..]M...........
+f..6qL..
+01:35:54.963015 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [P.], seq 107:570, ack 551, win 18, options [nop,nop,TS val 1723041870 ecr 1900853460], length 463
+E.....@.@.c.
+f._
+...#..`0g.~..]M...........
+f..NqL..HTTP/1.1 200 OK
+X-elastic-product: Elasticsearch
+content-type: application/json
+content-encoding: gzip
+content-length: 333
+
+..........|..n. ...<...[..$.\.R3tp+5Y,.!F.'2......v..R...r.wu.....H..".....:A-#.mc.
+..0Z.&*.PV.....E36T.r....P>..Y...^../...:+..|.P.sxU.n.7I.....k/dSqI.fR....n...4.h...mfpKl;.....,.4O.|...0E..0[e.b.&..g.7.M.1.8F(..+F[...&hUl....0..&'..7..H..'..2....Q.d.q..ByU]D.*j..8Q.)\?c.       Z'.r...@B7.._
+.(0.q   ....S...`..e    ..@9~.hq[|.......uZ$=$...
+01:35:54.963047 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [.], ack 570, win 17, options [nop,nop,TS val 1900853996 ecr 1723041870], length 0
+E..4Y.@.@..E
+...
+f._.`#...]M0g.M...........
+qL..f..N
+01:35:55.367729 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 551:843, ack 570, win 17, options [nop,nop,TS val 1900854401 ecr 1723041870], length 292
+E..XY.@.@..
+...
+f._.`#...]M0g.M...........
+qL..f..NGET /_license HTTP/1.1
+Connection: Keep-Alive
+Content-Type: application/json
+Content-Length: 0
+Host: elasticsearch-master:9200
+User-Agent: Logstash/8.5.1 (OS=Linux-5.10.0-21-amd64-amd64; JVM=Eclipse Adoptium-17.0.5) logstash-output-elasticsearch/11.9.3
+Accept-Encoding: gzip,deflate
+
+
+01:35:55.367811 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 843, win 19, options [nop,nop,TS val 1723042275 ecr 1900854401], length 0
+E..4..@.@.d.
+f._
+...#..`0g.M..^q...........
+f...qL..
+01:35:55.421744 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [P.], seq 570:935, ack 843, win 19, options [nop,nop,TS val 1723042329 ecr 1900854401], length 365
+E.....@.@.cy
+f._
+...#..`0g.M..^q.....X.....
+f...qL..HTTP/1.1 200 OK
+X-elastic-product: Elasticsearch
+content-type: application/json
+content-encoding: gzip
+content-length: 235
+
+..........t..j.0.E..
+.uUF.....U7b*.t@....%....       4......h..8.@....8..6.$.,5...]........Sy\..Ur0....V.R!WG..1Zk.....s...0....s.v..w...0q./R..fP..6..qK..(..~...T..j.M...6n......'.....5R.@.!......u%.0.r.cr......]....GO.....u........SW..r...
+01:35:55.421758 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [.], ack 935, win 18, options [nop,nop,TS val 1900854455 ecr 1723042329], length 0
+E..4Y.@.@..C
+...
+f._.`#...^q0g.............
+qL..f...
+01:35:57.135247 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 843:1127, ack 935, win 18, options [nop,nop,TS val 1900856168 ecr 1723042329], length 284
+E..PY.@.@..&
+...
+f._.`#...^q0g.............
+qL.hf...GET / HTTP/1.1
+Connection: Keep-Alive
+Content-Type: application/json
+Content-Length: 0
+Host: elasticsearch-master:9200
+User-Agent: Logstash/8.5.1 (OS=Linux-5.10.0-21-amd64-amd64; JVM=Eclipse Adoptium-17.0.5) logstash-output-elasticsearch/11.9.3
+Accept-Encoding: gzip,deflate
+
+
+01:35:57.135315 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 1127, win 19, options [nop,nop,TS val 1723044042 ecr 1900856168], length 0
+E..4..@.@.d.
+f._
+...#..`0g...._............
+f...qL.h
+01:35:57.140690 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [P.], seq 935:1398, ack 1127, win 19, options [nop,nop,TS val 1723044048 ecr 1900856168], length 463
+E.....@.@.c.
+f._
+...#..`0g...._............
+f...qL.hHTTP/1.1 200 OK
+X-elastic-product: Elasticsearch
+content-type: application/json
+content-encoding: gzip
+content-length: 333
+
+..........|..n. ...<...[..$.\.R3tp+5Y,.!F.'2......v..R...r.wu.....H..".....:A-#.mc.
+..0Z.&*.PV.....E36T.r....P>..Y...^../...:+..|.P.sxU.n.7I.....k/dSqI.fR....n...4.h...mfpKl;.....,.4O.|...0E..0[e.b.&..g.7.M.1.8F(..+F[...&hUl....0..&'..7..H..'..2....Q.d.q..ByU]D.*j..8Q.)\?c.       Z'.r...@B7.._
+.(0.q   ....S...`..e    ..@9~.hq[|.......uZ$=$...
+01:35:57.140705 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [.], ack 1398, win 19, options [nop,nop,TS val 1900856174 ecr 1723044048], length 0
+E..4Y.@.@..A
+...
+f._.`#..._.0g.............
+qL.nf...
+01:35:57.824225 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 1127:1421, ack 1398, win 19, options [nop,nop,TS val 1900856857 ecr 1723044048], length 294
+E..ZY.@.@...
+...
+f._.`#..._.0g.............
+qL..f...HEAD /_index_template/ecs-logstash HTTP/1.1
+Connection: Keep-Alive
+Content-Type: application/json
+Host: elasticsearch-master:9200
+User-Agent: Logstash/8.5.1 (OS=Linux-5.10.0-21-amd64-amd64; JVM=Eclipse Adoptium-17.0.5) logstash-output-elasticsearch/11.9.3
+Accept-Encoding: gzip,deflate
+
+
+01:35:57.872191 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 1421, win 20, options [nop,nop,TS val 1723044779 ecr 1900856857], length 0
+E..4..@.@.d.
+f._
+...#..`0g....`............
+f...qL..
+01:35:57.874781 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [P.], seq 1398:1506, ack 1421, win 20, options [nop,nop,TS val 1723044782 ecr 1900856857], length 108
+E.....@.@.dv
+f._
+...#..`0g....`......W.....
+f...qL..HTTP/1.1 200 OK
+X-elastic-product: Elasticsearch
+content-type: application/json
+content-length: 63784
+
+
+01:35:57.874800 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [.], ack 1506, win 19, options [nop,nop,TS val 1900856908 ecr 1723044782], length 0
+E..4Y.@.@..?
+...
+f._.`#...`.0g.............
+qL.Lf...
+01:36:05.114342 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 1421:1715, ack 1506, win 19, options [nop,nop,TS val 1900864147 ecr 1723044782], length 294
+E..ZY.@.@...
+...
+f._.`#...`.0g.............
+qL..f...POST /_bulk HTTP/1.1
+Connection: Keep-Alive
+Content-Type: application/json
+Content-Length: 16513
+Host: elasticsearch-master:9200
+User-Agent: Logstash/8.5.1 (OS=Linux-5.10.0-21-amd64-amd64; JVM=Eclipse Adoptium-17.0.5) logstash-output-elasticsearch/11.9.3
+Accept-Encoding: gzip,deflate
+
+
+01:36:05.114428 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 1715, win 21, options [nop,nop,TS val 1723052021 ecr 1900864147], length 0
+E..4..@.@.d.
+f._
+...#..`0g....a............
+f...qL..
+01:36:05.114534 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 1715:5909, ack 1506, win 19, options [nop,nop,TS val 1900864148 ecr 1723052021], length 4194
+E...Y.@.@.      .
+...
+f._.`#...a.0g.......M.....
+qL..f...{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"@version":"1","@timestamp":"2023-05-04T22:29:58.394704597Z","message":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-2\" devid=\"KJLAHF&(*A^(S&FAJHASD*AS\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-2\" eventtime=1607644801 srcip=192.12.253.28 srcport=27745 srcintf=\"lan04\" srcintfrole=\"undefined\" dstip=192.59.23.53 dstport=9200 dstintf=\"lan5\" dstintfrole=\"lan\" poluuid=\"bbbbbbbbbbbbb\" sessionid=2219713032 proto=6 action=\"start\" policyid=1763 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","event":{"original":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-2\" devid=\"KJLAHF&(*A^(S&FAJHASD*AS\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-2\" eventtime=1607644801 srcip=192.12.253.28 srcport=27745 srcintf=\"lan04\" srcintfrole=\"undefined\" dstip=192.59.23.53 dstport=9200 dstintf=\"lan5\" dstintfrole=\"lan\" poluuid=\"bbbbbbbbbbbbb\" sessionid=2219713032 proto=6 action=\"start\" policyid=1763 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"}}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"dstip":"192.55.20.227","policyid":"2756","logflag":"<189>","vd":"VD-1","srcport":"62089","sessionid":"3810715229","policytype":"policy","trandisp":"noop","service":"TCP_TRAFFIC","dstport":"9200","sentpkt":"0","srcip":"192.12.253.13","duration":"0","@version":"1","event":{"original":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644801 srcip=192.12.253.13 srcport=62089 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.227 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715229 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"},"appcat":"unscanned","type":"traffic","time":"01:00:01","@timestamp":"2023-05-04T22:29:58.532813956Z","dstcountry":"Reserved","dstintf":"lan5","rcvdyte":"0","logid":"0000000015","devid":"KJHFJAHFKJAHSKFJDHASKJFH","message":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644801 srcip=192.12.253.13 srcport=62089 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.227 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715229 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","eventtime":"1607644801","dstintfrole":"dmz","srcintf":"lan02","srcintfrole":"undefined","level":"notice","devname":"FW-1","poluuid":"aaaaaaaaaaaaa","proto":"6","action":"start","srcountry":"Reserved","date":"2020-12-11","sentbyte":"0","subtype":"forward"}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"dstip":"192.55.20.238","policyid":"2756","logflag":"<189>","vd":"VD-1","srcport":"32146","sessionid":"3810715264","policytype":"policy","trandisp":"noop","service":"TCP_TRAFFIC","dstport":"9200","sentpkt":"0","srcip":"192.12.253.19","duration":"0","@version":"1","event":{"original":"<189>date=2020-12-11 time=01:00:00 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644800 srcip=192.12.253.19 srcport=32146 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.238 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715264 proto=6 action=\"start\" policyid=2756 policytype=
+01:36:05.114562 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 5909, win 23, options [nop,nop,TS val 1723052022 ecr 1900864148], length 0
+E..4..@.@.d.
+f._
+...#..`0g....r;...........
+f...qL..
+01:36:05.114570 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 5909:10103, ack 1506, win 19, options [nop,nop,TS val 1900864148 ecr 1723052021], length 4194
+E...Y.@.@.      .
+...
+f._.`#...r;0g.......M.....
+qL..f...\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"},"appcat":"unscanned","type":"traffic","time":"01:00:00","@timestamp":"2023-05-04T22:29:58.534859829Z","dstcountry":"Reserved","dstintf":"lan5","rcvdyte":"0","logid":"0000000015","devid":"KJHFJAHFKJAHSKFJDHASKJFH","message":"<189>date=2020-12-11 time=01:00:00 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644800 srcip=192.12.253.19 srcport=32146 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.238 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715264 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","eventtime":"1607644800","dstintfrole":"dmz","srcintf":"lan02","srcintfrole":"undefined","level":"notice","devname":"FW-1","poluuid":"aaaaaaaaaaaaa","proto":"6","action":"start","srcountry":"Reserved","date":"2020-12-11","sentbyte":"0","subtype":"forward"}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"dstip":"192.55.20.239","policyid":"2756","logflag":"<189>","vd":"VD-1","srcport":"61596","sessionid":"3810715266","policytype":"policy","trandisp":"noop","service":"TCP_TRAFFIC","dstport":"9200","sentpkt":"0","srcip":"192.12.253.8","duration":"0","@version":"1","event":{"original":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644801 srcip=192.12.253.8 srcport=61596 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.239 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715266 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"},"appcat":"unscanned","type":"traffic","time":"01:00:01","@timestamp":"2023-05-04T22:29:58.535650587Z","dstcountry":"Reserved","dstintf":"lan5","rcvdyte":"0","logid":"0000000015","devid":"KJHFJAHFKJAHSKFJDHASKJFH","message":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644801 srcip=192.12.253.8 srcport=61596 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.239 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715266 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","eventtime":"1607644801","dstintfrole":"dmz","srcintf":"lan02","srcintfrole":"undefined","level":"notice","devname":"FW-1","poluuid":"aaaaaaaaaaaaa","proto":"6","action":"start","srcountry":"Reserved","date":"2020-12-11","sentbyte":"0","subtype":"forward"}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"@version":"1","@timestamp":"2023-05-04T22:29:58.536326080Z","message":"<189>date=2020-12-11 time=01:00:00 devname=\"FW-2\" devid=\"KJLAHF&(*A^(S&FAJHASD*AS\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-2\" eventtime=1607644800 srcip=192.12.253.22 srcport=42460 srcintf=\"lan04\" srcintfrole=\"undefined\" dstip=192.59.20.237 dstport=9200 dstintf=\"lan5\" dstintfrole=\"lan\" poluuid=\"bbbbbbbbbbbbb\" sessionid=2219713061 proto=6 action=\"start\" policyid=1763 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","event":{"original":"<189>date=2020-12-11 time=01:00:00 devname=\"FW-2\" devid=\"KJLAHF&(*A^(S&FAJHASD*AS\" logid=\"0000000015\" type=\"traffic\" subtype=\"fo
+01:36:05.114591 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 10103, win 25, options [nop,nop,TS val 1723052022 ecr 1900864148], length 0
+E..4. @.@.d.
+f._
+...#..`0g.................
+f...qL..
+01:36:05.114599 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 10103:14297, ack 1506, win 19, options [nop,nop,TS val 1900864148 ecr 1723052021], length 4194
+E...Y.@.@.      .
+...
+f._.`#.....0g.......M.....
+qL..f...rward\" level=\"notice\" vd=\"VD-2\" eventtime=1607644800 srcip=192.12.253.22 srcport=42460 srcintf=\"lan04\" srcintfrole=\"undefined\" dstip=192.59.20.237 dstport=9200 dstintf=\"lan5\" dstintfrole=\"lan\" poluuid=\"bbbbbbbbbbbbb\" sessionid=2219713061 proto=6 action=\"start\" policyid=1763 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"}}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"dstip":"192.55.20.232","policyid":"2756","logflag":"<189>","vd":"VD-1","srcport":"64344","sessionid":"3810715268","policytype":"policy","trandisp":"noop","service":"TCP_TRAFFIC","dstport":"9200","sentpkt":"0","srcip":"192.12.253.21","duration":"0","@version":"1","event":{"original":"<189>date=2020-12-11 time=01:00:00 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644800 srcip=192.12.253.21 srcport=64344 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.232 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715268 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"},"appcat":"unscanned","type":"traffic","time":"01:00:00","@timestamp":"2023-05-04T22:29:58.536854157Z","dstcountry":"Reserved","dstintf":"lan5","rcvdyte":"0","logid":"0000000015","devid":"KJHFJAHFKJAHSKFJDHASKJFH","message":"<189>date=2020-12-11 time=01:00:00 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644800 srcip=192.12.253.21 srcport=64344 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.232 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715268 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","eventtime":"1607644800","dstintfrole":"dmz","srcintf":"lan02","srcintfrole":"undefined","level":"notice","devname":"FW-1","poluuid":"aaaaaaaaaaaaa","proto":"6","action":"start","srcountry":"Reserved","date":"2020-12-11","sentbyte":"0","subtype":"forward"}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"dstip":"192.55.20.232","policyid":"2756","logflag":"<189>","vd":"VD-1","srcport":"8906","sessionid":"3810715288","policytype":"policy","trandisp":"noop","service":"TCP_TRAFFIC","dstport":"9200","sentpkt":"0","srcip":"192.12.253.21","duration":"0","@version":"1","event":{"original":"<189>date=2020-12-11 time=01:00:00 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644800 srcip=192.12.253.21 srcport=8906 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.232 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715288 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"},"appcat":"unscanned","type":"traffic","time":"01:00:00","@timestamp":"2023-05-04T22:29:58.537558259Z","dstcountry":"Reserved","dstintf":"lan5","rcvdyte":"0","logid":"0000000015","devid":"KJHFJAHFKJAHSKFJDHASKJFH","message":"<189>date=2020-12-11 time=01:00:00 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644800 srcip=192.12.253.21 srcport=8906 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.232 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715288 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccou
+01:36:05.114621 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 14297, win 27, options [nop,nop,TS val 1723052022 ecr 1900864148], length 0
+E..4.!@.@.d.
+f._
+...#..`0g.................
+f...qL..
+01:36:05.114627 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [.], seq 14297:15695, ack 1506, win 19, options [nop,nop,TS val 1900864148 ecr 1723052021], length 1398
+E...Y.@.@...
+...
+f._.`#.....0g.......a.....
+qL..f...ntry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","eventtime":"1607644800","dstintfrole":"dmz","srcintf":"lan02","srcintfrole":"undefined","level":"notice","devname":"FW-1","poluuid":"aaaaaaaaaaaaa","proto":"6","action":"start","srcountry":"Reserved","date":"2020-12-11","sentbyte":"0","subtype":"forward"}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"@version":"1","@timestamp":"2023-05-04T22:29:58.538111717Z","message":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-2\" devid=\"KJLAHF&(*A^(S&FAJHASD*AS\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-2\" eventtime=1607644801 srcip=192.12.253.24 srcport=60437 srcintf=\"lan04\" srcintfrole=\"undefined\" dstip=192.59.20.236 dstport=9200 dstintf=\"lan5\" dstintfrole=\"lan\" poluuid=\"bbbbbbbbbbbbb\" sessionid=2219713074 proto=6 action=\"start\" policyid=1763 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","event":{"original":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-2\" devid=\"KJLAHF&(*A^(S&FAJHASD*AS\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-2\" eventtime=1607644801 srcip=192.12.253.24 srcport=60437 srcintf=\"lan04\" srcintfrole=\"undefined\" dstip
+01:36:05.114648 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 15695, win 27, options [nop,nop,TS val 1723052022 ecr 1900864148], length 0
+E..4."@.@.d.
+f._
+...#..`0g.....u...........
+f...qL..
+01:36:05.114661 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [P.], seq 15695:18228, ack 1506, win 19, options [nop,nop,TS val 1900864148 ecr 1723052022], length 2533
+E.
+.Y.@.@..N
+...
+f._.`#....u0g.............
+qL..f...=192.59.20.236 dstport=9200 dstintf=\"lan5\" dstintfrole=\"lan\" poluuid=\"bbbbbbbbbbbbb\" sessionid=2219713074 proto=6 action=\"start\" policyid=1763 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"}}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"dstip":"192.55.20.238","policyid":"2756","logflag":"<189>","vd":"VD-1","srcport":"2264","sessionid":"3810715287","policytype":"policy","trandisp":"noop","service":"TCP_TRAFFIC","dstport":"9200","sentpkt":"0","srcip":"192.12.253.10","duration":"0","@version":"1","event":{"original":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644801 srcip=192.12.253.10 srcport=2264 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.238 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715287 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n"},"appcat":"unscanned","type":"traffic","time":"01:00:01","@timestamp":"2023-05-04T22:29:58.538613965Z","dstcountry":"Reserved","dstintf":"lan5","rcvdyte":"0","logid":"0000000015","devid":"KJHFJAHFKJAHSKFJDHASKJFH","message":"<189>date=2020-12-11 time=01:00:01 devname=\"FW-1\" devid=\"KJHFJAHFKJAHSKFJDHASKJFH\" logid=\"0000000015\" type=\"traffic\" subtype=\"forward\" level=\"notice\" vd=\"VD-1\" eventtime=1607644801 srcip=192.12.253.10 srcport=2264 srcintf=\"lan02\" srcintfrole=\"undefined\" dstip=192.55.20.238 dstport=9200 dstintf=\"lan5\" dstintfrole=\"dmz\" poluuid=\"aaaaaaaaaaaaa\" sessionid=3810715287 proto=6 action=\"start\" policyid=2756 policytype=\"policy\" service=\"TCP_TRAFFIC\" dstcountry=\"Reserved\" srccountry=\"Reserved\" trandisp=\"noop\" duration=0 sentbyte=0 rcvdbyte=0 sentpkt=0 appcat=\"unscanned\"\n","eventtime":"1607644801","dstintfrole":"dmz","srcintf":"lan02","srcintfrole":"undefined","level":"notice","devname":"FW-1","poluuid":"aaaaaaaaaaaaa","proto":"6","action":"start","srcountry":"Reserved","date":"2020-12-11","sentbyte":"0","subtype":"forward"}
+{"index":{"_id":null,"_index":"logstash","routing":null}}
+{"@version":"1","@timestamp":"2023-05-04T22:29:58.539292701Z","message":"\n","event":{"original":"\n"}}
+
+01:36:05.114682 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [.], ack 18228, win 29, options [nop,nop,TS val 1723052022 ecr 1900864148], length 0
+E..4.#@.@.d.
+f._
+...#..`0g.....Z...........
+f...qL..
+01:36:06.054319 IP 10.102.176.95.9200 > 10.244.1.12.42592: Flags [P.], seq 1506:1922, ack 18228, win 29, options [nop,nop,TS val 1723052961 ecr 1900864148], length 416
+E....$@.@.c;
+f._
+...#..`0g.....Z...........
+f...qL..HTTP/1.1 200 OK
+X-elastic-product: Elasticsearch
+content-type: application/json
+content-encoding: gzip
+content-length: 286
+
+.............N. .@.e.....+7M<..... .Z,.u.F....&...=@o.3.#<`..}..P.. ....U6...q..y.....9A.....BT...}.H.........;{z(.....'R0..,....F...*b..C...U&.......Qk...9.a.2..e1/..Q;.e..g2...:". w<2.8.lUQ...........
+.;J.nN..........*.....U.N....|........T.k.u.W.&.........Qe.x^..?._.........2..c_...
+01:36:06.054348 IP 10.244.1.12.42592 > 10.102.176.95.9200: Flags [.], ack 1922, win 19, options [nop,nop,TS val 1900865087 ecr 1723052961], length 0
+E..4Y.@.@..1
+...
+f._.`#....Z0g.............
+qL.?f...
